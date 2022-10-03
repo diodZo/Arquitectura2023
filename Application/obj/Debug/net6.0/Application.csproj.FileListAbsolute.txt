@@ -1,0 +1,15 @@
+C:\Proyectos\Deuz\SolutionDeuz\Application\bin\Debug\net6.0\Application.deps.json
+C:\Proyectos\Deuz\SolutionDeuz\Application\bin\Debug\net6.0\Application.dll
+C:\Proyectos\Deuz\SolutionDeuz\Application\bin\Debug\net6.0\Application.pdb
+C:\Proyectos\Deuz\SolutionDeuz\Application\bin\Debug\net6.0\Domain.dll
+C:\Proyectos\Deuz\SolutionDeuz\Application\bin\Debug\net6.0\Domain.pdb
+C:\Proyectos\Deuz\SolutionDeuz\Application\obj\Debug\net6.0\Application.csproj.AssemblyReference.cache
+C:\Proyectos\Deuz\SolutionDeuz\Application\obj\Debug\net6.0\Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Proyectos\Deuz\SolutionDeuz\Application\obj\Debug\net6.0\Application.AssemblyInfoInputs.cache
+C:\Proyectos\Deuz\SolutionDeuz\Application\obj\Debug\net6.0\Application.AssemblyInfo.cs
+C:\Proyectos\Deuz\SolutionDeuz\Application\obj\Debug\net6.0\Application.csproj.CoreCompileInputs.cache
+C:\Proyectos\Deuz\SolutionDeuz\Application\obj\Debug\net6.0\Application.csproj.CopyComplete
+C:\Proyectos\Deuz\SolutionDeuz\Application\obj\Debug\net6.0\Application.dll
+C:\Proyectos\Deuz\SolutionDeuz\Application\obj\Debug\net6.0\refint\Application.dll
+C:\Proyectos\Deuz\SolutionDeuz\Application\obj\Debug\net6.0\Application.pdb
+C:\Proyectos\Deuz\SolutionDeuz\Application\obj\Debug\net6.0\ref\Application.dll

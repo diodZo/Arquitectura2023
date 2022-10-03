@@ -5,43 +5,62 @@ networks:
     driver: bridge 
 
 services:
+  webapiauth:
+    image: ${DOCKER_REGISTRY-}webapiauth
+    build:
+      context: .
+      dockerfile: WebApiAuth/Dockerfile
+    ports:
+      - "5770:70"     
+    environment:
+      DB_CONNECTION_STRING: "Host=localhost;port=5432;database=auth;username=bloguser;password=bloguser"
+    networks:
+      - dockerapi-dev
+
   webapi:
     image: ${DOCKER_REGISTRY-}webapi
     build:
       context: .
       dockerfile: WebApi/Dockerfile
     ports:
-      - "8000:80"     
+      - "5880:80"     
     environment:
       DB_CONNECTION_STRING: "Host=localhost;port=5432;database=blogdb;username=bloguser;password=bloguser"
     networks:
-      - dockerapi-dev 
+      - dockerapi-dev
 
   postgres_image:
+    container_name: postgres_image
     image: postgres:latest
     ports:
      - 5432:5432
-    restart: unless-stopped
+    restart: always
     volumes:
       - db_volume:/var/lib/postgresql/data
+      - ./docker_postgres_init.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql
     environment:
       POSTGRES_USER: "bloguser"
       POSTGRES_PASSWORD: "bloguser"
       POSTGRES_DB: "blogdb"
     networks:
       - dockerapi-dev
+  
 
   pgadmin:
     container_name: pgadmin4_container
     image: dpage/pgadmin4
-    restart: unless-stopped
+    restart: always
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: root
     ports:
       - "8050:80"
+    volumes:
+      - ./data/pgadmin:/var/lib/pgadmin
     networks:
       - dockerapi-dev
 
 volumes:
   db_volume:
+  pgadmin:
+

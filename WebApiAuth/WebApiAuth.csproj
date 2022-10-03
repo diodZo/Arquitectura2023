@@ -20,4 +20,12 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Core\Business\inter\" />
+    <Folder Include="Core\Business\impl\" />
+    <Folder Include="Core\Domain\Entities\" />
+    <Folder Include="Infrastructure\Repositories\impl\" />
+    <Folder Include="Infrastructure\Repositories\inter\" />
+  </ItemGroup>
+
 </Project>

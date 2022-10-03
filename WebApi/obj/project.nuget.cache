@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "5ZK3L2RgIXsKSBOlvwvFi14unzLMhXBT62yVgEGT8os3Xks+HcsVehx8Mip23UBUNng1/7sauv2J6t06DTMu6g==",
+  "dgSpecHash": "y/Af6CiIAV4C6zU1eW6dK7IZjPvkLIgy6zTu+Fl0PuuiEvifl9oKbcLXXgTEuwtifVN+m8hOpJpYem15W0fcxQ==",
   "success": true,
-  "projectFilePath": "C:\\Proyectos\\Deuz\\SolutionDeuz\\WebApi\\WebApi.csproj",
+  "projectFilePath": "C:\\Proyectos\\Arquitectura2023\\WebApi\\WebApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\jpino\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\jpino\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.9\\microsoft.entityframeworkcore.6.0.9.nupkg.sha512",

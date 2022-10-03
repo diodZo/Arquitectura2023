@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "gpgoqmmlzQvQe+kCZm+Ex/NNOaX1VsPwxSTKshSu0ilVfem2J0tIUU22c+emut4T/kiD5wqQGuWro6gZlMMgyQ==",
+  "dgSpecHash": "GHl9vfaoZIhnJ0J7ig3MHo+liM5IOYo/uPPaaKQw8y7Zl7Qv+LjMrvw6UUbUhfIlCfqZ90VWuMceu4pkbkwxIw==",
   "success": true,
-  "projectFilePath": "C:\\Proyectos\\Deuz\\SolutionDeuz\\Domain\\Domain.csproj",
+  "projectFilePath": "C:\\Proyectos\\Arquitectura2023\\Domain\\Domain.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Proyectos\\Deuz\\SolutionDeuz\\Domain\\Domain.csproj": {}
+    "C:\\Proyectos\\Arquitectura2023\\Domain\\Domain.csproj": {}
   },
   "projects": {
-    "C:\\Proyectos\\Deuz\\SolutionDeuz\\Domain\\Domain.csproj": {
+    "C:\\Proyectos\\Arquitectura2023\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Proyectos\\Deuz\\SolutionDeuz\\Domain\\Domain.csproj",
+        "projectUniqueName": "C:\\Proyectos\\Arquitectura2023\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "C:\\Proyectos\\Deuz\\SolutionDeuz\\Domain\\Domain.csproj",
+        "projectPath": "C:\\Proyectos\\Arquitectura2023\\Domain\\Domain.csproj",
         "packagesPath": "C:\\Users\\jpino\\.nuget\\packages\\",
-        "outputPath": "C:\\Proyectos\\Deuz\\SolutionDeuz\\Domain\\obj\\",
+        "outputPath": "C:\\Proyectos\\Arquitectura2023\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\jpino\\AppData\\Roaming\\NuGet\\NuGet.Config",

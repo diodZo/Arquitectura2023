@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "pYwLDvtEwYOml51+BXrjvSGJRUzmEG2KZADupShp77huhZlAlVnF/cDwKOhOrWFMQc0G/XRMB945tYHJK6O19w==",
+  "dgSpecHash": "WP/p5sRFCG4qeDxqz7t0IjqcWng/++bgr+Pozm9GxycM6B4MRhicSwKli6uUWEUVEieWjY1SeshfWO3uiprfuQ==",
   "success": true,
-  "projectFilePath": "C:\\Proyectos\\Deuz\\SolutionDeuz\\Infrastructure\\Infrastructure.csproj",
+  "projectFilePath": "C:\\Proyectos\\Arquitectura2023\\Infrastructure\\Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\jpino\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\jpino\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.9\\microsoft.entityframeworkcore.6.0.9.nupkg.sha512",

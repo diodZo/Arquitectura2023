@@ -8,13 +8,16 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "WebApi\WebApi.csproj", "{F393C1AA-D3A2-4868-8DEC-5A6D6CBF6074}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00_Compose", "00_Compose", "{20638253-6EA9-4A90-9BA1-B03A0B067FA2}"
+	ProjectSection(SolutionItems) = preProject
+		comandos.txt = comandos.txt
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4185AF70-CC78-49AB-8A0B-7DC2DAB4C248}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiAuth", "WebApiAuth\WebApiAuth.csproj", "{562A3A7B-295A-4F0B-AE13-8FE91C4DA7F1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiAuth", "WebApiAuth\WebApiAuth.csproj", "{562A3A7B-295A-4F0B-AE13-8FE91C4DA7F1}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{47371731-7F76-44FB-B122-AE7DE083A045}"
 EndProject

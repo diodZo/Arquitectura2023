@@ -1,0 +1,5 @@
+-- Migracion Auth 
+ Add-Migration "agregar parametros" -OutputDir Infrastructure/Migrations -project WebApiAuth
+
+ --update base
+ Update-Database -Context ApplicationDbContext -Connection "Host=localhost;port=5432;database=auth;username=bloguser;password=bloguser"

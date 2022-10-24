@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using WebApiAuth.Core.Domain.Entities;
 using WebApiAuth.Core.Domain.ViewModels;
 
 namespace WebApiAuth.Controllers
@@ -12,13 +13,13 @@ namespace WebApiAuth.Controllers
     [ApiController]
     public class AuthenticateController : ControllerBase
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly UserManager<UserEntity> _userManager;
+        private readonly RoleManager<RoleEntity> _roleManager;
         private readonly IConfiguration _configuration;
 
         public AuthenticateController(
-            UserManager<IdentityUser> userManager,
-            RoleManager<IdentityRole> roleManager,
+            UserManager<UserEntity> userManager,
+            RoleManager<RoleEntity> roleManager,
             IConfiguration configuration)
         {
             _userManager = userManager;
@@ -67,7 +68,7 @@ namespace WebApiAuth.Controllers
                 if (userExists != null)
                     return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User already exists!" });
 
-                IdentityUser user = new()
+                UserEntity user = new()
                 {
                     Email = model.Email,
                     SecurityStamp = Guid.NewGuid().ToString(),
@@ -93,20 +94,22 @@ namespace WebApiAuth.Controllers
             if (userExists != null)
                 return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User already exists!" });
 
-            IdentityUser user = new()
+            UserEntity user = new()
             {
                 Email = model.Email,
                 SecurityStamp = Guid.NewGuid().ToString(),
                 UserName = model.Username
             };
+
             var result = await _userManager.CreateAsync(user, model.Password);
             if (!result.Succeeded)
                 return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." });
 
-            if (!await _roleManager.RoleExistsAsync(UserRoles.Admin))
-                await _roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
-            if (!await _roleManager.RoleExistsAsync(UserRoles.User))
-                await _roleManager.CreateAsync(new IdentityRole(UserRoles.User));
+            //if (!await _roleManager.RoleExistsAsync(UserRoles.Admin))
+            //    await _roleManager.CreateAsync(new RoleEntity(UserRoles.Admin));
+
+            //if (!await _roleManager.RoleExistsAsync(UserRoles.User))
+            //    await _roleManager.CreateAsync(new IdentityRole(UserRoles.User));
 
             if (await _roleManager.RoleExistsAsync(UserRoles.Admin))
             {

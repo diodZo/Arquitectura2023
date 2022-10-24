@@ -23,7 +23,7 @@
   <ItemGroup>
     <Folder Include="Core\Business\inter\" />
     <Folder Include="Core\Business\impl\" />
-    <Folder Include="Core\Domain\Entities\" />
+    <Folder Include="Infrastructure\Migrations\" />
     <Folder Include="Infrastructure\Repositories\impl\" />
     <Folder Include="Infrastructure\Repositories\inter\" />
   </ItemGroup>

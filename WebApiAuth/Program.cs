@@ -14,8 +14,8 @@ ConfigurationManager configuration = builder.Configuration;
 // Add services to the container.
 
 // For Entity Framework
-builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(configuration.GetConnectionString("ConnStr")));
-builder.Services.AddScoped<DbInitializer>();
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(configuration.GetConnectionString("ConnStr")), ServiceLifetime.Transient);
+builder.Services.AddTransient<DbInitializer>();
 
 // For Identity
 builder.Services.AddIdentity<UserEntity, RoleEntity>()

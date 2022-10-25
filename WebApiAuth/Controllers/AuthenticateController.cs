@@ -105,6 +105,7 @@ namespace WebApiAuth.Controllers
             if (!result.Succeeded)
                 return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." });
 
+
             //if (!await _roleManager.RoleExistsAsync(UserRoles.Admin))
             //    await _roleManager.CreateAsync(new RoleEntity(UserRoles.Admin));
 

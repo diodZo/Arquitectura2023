@@ -15,7 +15,7 @@ namespace WebApiAuth.Infrastructure.Persistence
                                                 IdentityUserClaim<int>,
                                                 UserRoleEntity,
                                                 IdentityUserLogin<int>,
-                                                IdentityRoleClaim<int>,
+                                                RoleClaimsEntity,
                                                 IdentityUserToken<int>>
     {
         
@@ -27,6 +27,8 @@ namespace WebApiAuth.Infrastructure.Persistence
         public virtual DbSet<ProvinciaEntity> Provincia { get; set; }
         public virtual DbSet<ComunaEntity> Comuna { get; set; }
         public virtual DbSet<VersionEntity> Version { get; set; }
+        public virtual DbSet<RoleClaimsEntity> RoleClaims { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

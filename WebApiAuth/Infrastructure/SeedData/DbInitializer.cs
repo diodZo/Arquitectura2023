@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using System.Data;
 using WebApiAuth.Core.Domain.Entities;
+using WebApiAuth.Infrastructure.Permissions;
 using WebApiAuth.Infrastructure.Persistence;
 
 namespace WebApiAuth.Infrastructure.SeedData
@@ -15,13 +18,13 @@ namespace WebApiAuth.Infrastructure.SeedData
 
                 if (!userManager.Users.Any())
                 {
-                    var Admin = new UserEntity
+                    var SuperAdmin = new UserEntity
                     {
-                        UserName = "Deuzti.Admin",
+                        UserName = "Deuzti.SuperAdmin",
                         NormalizedUserName = "Deuzti Super Administrador",
-                        Email = "admin@deuz.cl",
-                        PhoneNumber = "+56956754422",
-                        Nombres = "Admin",
+                        Email = "superadmin@deuz.cl",
+                        PhoneNumber = "+56911111111",
+                        Nombres = "Super Admin",
                         ApellidoPaterno = "Deuz",
                         ApellidoMaterno = "TI",
                         FechaDeNacimiento = DateTime.UtcNow,
@@ -31,11 +34,80 @@ namespace WebApiAuth.Infrastructure.SeedData
                         userLogin = false
                     };
 
-                    var result = userManager.CreateAsync(Admin, "D3uzTI@2023").Result;
+                    var Admin = new UserEntity
+                    {
+                        UserName = "Deuzti.Supervisor",
+                        NormalizedUserName = "Deuzti Supervisor",
+                        Email = "Supervisor@deuz.cl",
+                        PhoneNumber = "+56911111111",
+                        Nombres = "Supervisor Admin",
+                        ApellidoPaterno = "Deuz",
+                        ApellidoMaterno = "TI",
+                        FechaDeNacimiento = DateTime.UtcNow,
+                        Direccion = "Deuz Central",
+                        IdComuna = "06201",
+                        Imagen = string.Empty,
+                        userLogin = false
+                    };
+
+                    var Vendedor = new UserEntity
+                    {
+                        UserName = "Deuzti.Vendedor",
+                        NormalizedUserName = "Deuzti Vendedor",
+                        Email = "Vendedor@deuz.cl",
+                        PhoneNumber = "+56911111111",
+                        Nombres = "Vendedor",
+                        ApellidoPaterno = "Deuz",
+                        ApellidoMaterno = "TI",
+                        FechaDeNacimiento = DateTime.UtcNow,
+                        Direccion = "Deuz Central",
+                        IdComuna = "06201",
+                        Imagen = string.Empty,
+                        userLogin = false
+                    };
+
+                    var Usuario = new UserEntity
+                    {
+                        UserName = "Deuzti.Usuario",
+                        NormalizedUserName = "Deuzti Vendedor",
+                        Email = "Usuario@deuz.cl",
+                        PhoneNumber = "+56911111111",
+                        Nombres = "Usuario",
+                        ApellidoPaterno = "Deuz",
+                        ApellidoMaterno = "TI",
+                        FechaDeNacimiento = DateTime.UtcNow,
+                        Direccion = "Deuz Central",
+                        IdComuna = "06201",
+                        Imagen = string.Empty,
+                        userLogin = false
+                    };
+
+                    var result = userManager.CreateAsync(SuperAdmin, "D3uzTI@2023").Result;
 
                     if (result.Succeeded)
                     {
+                        userManager.AddToRoleAsync(SuperAdmin, "SuperAdmin").Wait();
+                    }
+
+                    var result1 = userManager.CreateAsync(Admin, "D3uzTI@2023").Result;
+
+                    if (result1.Succeeded)
+                    {
                         userManager.AddToRoleAsync(Admin, "Admin").Wait();
+                    }
+
+                    var result2 = userManager.CreateAsync(Vendedor, "D3uzTI@2023").Result;
+
+                    if (result2.Succeeded)
+                    {
+                        userManager.AddToRoleAsync(Vendedor, "Vendedor").Wait();
+                    }
+
+                    var result3 = userManager.CreateAsync(Usuario, "D3uzTI@2023").Result;
+
+                    if (result3.Succeeded)
+                    {
+                        userManager.AddToRoleAsync(Usuario, "Usuario").Wait();
                     }
                 }
             }
@@ -45,14 +117,15 @@ namespace WebApiAuth.Infrastructure.SeedData
             }
         }
 
-        internal static void SeedTablasDiccionarios(ApplicationDbContext context, RoleManager<RoleEntity> roleManager)
+        internal async static void SeedTablasDiccionarios(ApplicationDbContext context, RoleManager<RoleEntity> roleManager)
         {
-            ArgumentNullException.ThrowIfNull(context, nameof(context));
-            context.Database.EnsureCreated();
+            DbInitializer page = new DbInitializer();            
 
-            if (!roleManager.Roles.Any())
+            using (var dbContextTransaction = context.Database.BeginTransaction())
             {
-                var roles = new List<RoleEntity>
+                if (!roleManager.Roles.Any())
+                {
+                    var roles = new List<RoleEntity>
                     {
                         new RoleEntity{Name = "SuperAdmin"},
                         new RoleEntity{Name = "Admin"},
@@ -61,15 +134,13 @@ namespace WebApiAuth.Infrastructure.SeedData
                         new RoleEntity{Name = "Usuario"},
                     };
 
-                foreach (var rol in roles)
-                {
-                    roleManager.CreateAsync(rol).Wait();
+                    for (int i = 0; i < roles.Count; i++)
+                    {
+                        roleManager.CreateAsync(roles[i]).Wait();
+                    }
                 }
-            }
 
-            if (!context.Region.Any())
-            {
-                using (var dbContextTransaction = context.Database.BeginTransaction())
+                if (!await context.Region.AnyAsync())
                 {
                     var region = new List<RegionEntity>
                     {
@@ -90,15 +161,10 @@ namespace WebApiAuth.Infrastructure.SeedData
                             new RegionEntity { Nombre = "Arica y Parinacota", CodRegion = "15" }
                     };
 
-                    context.AddRange(region);
-                    context.SaveChanges();
-                    dbContextTransaction.Commit();
+                    await context.AddRangeAsync(region);
                 }
-            }
 
-            if (!context.Provincia.Any())
-            {
-                using (var dbContextTransaction = context.Database.BeginTransaction())
+                if (!await context.Provincia.AnyAsync())
                 {
                     var provincias = new List<ProvinciaEntity>
                     {
@@ -160,14 +226,9 @@ namespace WebApiAuth.Infrastructure.SeedData
                     };
 
                     context.AddRange(provincias);
-                    context.SaveChanges();
-                    dbContextTransaction.Commit();
                 }
-            }
 
-            if (!context.Comuna.Any())
-            {
-                using (var dbContextTransaction = context.Database.BeginTransaction())
+                if (!await context.Comuna.AnyAsync())
                 {
                     var zonas = new List<ComunaEntity>
                     {
@@ -521,10 +582,52 @@ namespace WebApiAuth.Infrastructure.SeedData
                     };
 
                     context.AddRange(zonas);
-                    context.SaveChanges();
-                    dbContextTransaction.Commit();
                 }
-            }
+
+                if (!await context.Version.AnyAsync())
+                {
+                    VersionEntity version = new VersionEntity { version = "0.0.1", Descripcion = "prototipo inicial", FechaCreacion = DateTime.UtcNow, Estado = true };
+
+                    context.AddRange(version);
+                }
+
+
+                if (!await context.RoleClaims.AnyAsync())
+                {
+                    List<EnumModel> configuracion = ((permisos_configuracion[])Enum.GetValues(typeof(permisos_configuracion))).Select(c => new EnumModel() { Value = (int)c, Name = c.ToString() }).ToList();
+
+                    var listaClaims = new List<RoleClaimsEntity>();
+
+                    var AllRoles = await (from cust in context.Roles select cust).ToListAsync();
+
+                    var allClaims = await (from cl in context.RoleClaims select cl).ToListAsync();
+
+                    foreach (var item in AllRoles)
+                    {
+                        for (int j = 0; j < configuracion.Count(); j++)
+                        {
+                            var resultado = allClaims.Any(a => a.ClaimType == "Permission" && a.ClaimValue == configuracion[j].Name.ToString());
+
+                            if (!resultado)
+                            {
+                                var clain = new RoleClaimsEntity
+                                {
+                                    RoleId = item.Id,
+                                    ClaimType = "Permission",
+                                    ClaimValue = configuracion[j].Name.ToString()
+                                };
+
+                                listaClaims.Add(clain);
+                            }
+                        }
+                    }
+
+                    await context.AddRangeAsync(listaClaims);
+                }
+
+                await context.SaveChangesAsync();
+                dbContextTransaction.Commit();
+            }            
         }
     }
 }

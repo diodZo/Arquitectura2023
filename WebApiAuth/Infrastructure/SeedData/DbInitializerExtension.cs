@@ -17,7 +17,6 @@ internal static class DbInitializerExtension
 
             var userManager = services.GetRequiredService<UserManager<UserEntity>>();
             var roleManager = services.GetRequiredService<RoleManager<RoleEntity>>();
-
             DbInitializer.SeedTablasDiccionarios(context, roleManager);
             DbInitializer.SeedUsers(context, userManager);
         }

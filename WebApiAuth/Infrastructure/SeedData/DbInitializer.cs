@@ -614,7 +614,8 @@ namespace WebApiAuth.Infrastructure.SeedData
                                 {
                                     RoleId = item.Id,
                                     ClaimType = "Permission",
-                                    ClaimValue = configuracion[j].Name.ToString()
+                                    ClaimValue = configuracion[j].Name.ToString(),
+                                    PermisoId = configuracion[j].Value,
                                 };
 
                                 listaClaims.Add(clain);

@@ -17,11 +17,12 @@ namespace WebApiAuth.Core.Domain.Entities
 
         [StringLength(45)]
         public string icon { get; set; }
-        public Nullable<bool> divide { get; set; }
-        public Nullable<int> sistema { get; set; }
+        public Nullable<int> idsistema { get; set; }
         public Nullable<int> padre { get; set; }
         public Nullable<int> permiso { get; set; }
         public Nullable<bool> estado { get; set; }
         public Nullable<int> orden { get; set; }
+
+        public virtual SistemaEntity Sistema { get; set; }
     }
 }

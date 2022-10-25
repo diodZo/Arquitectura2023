@@ -28,6 +28,7 @@ namespace WebApiAuth.Infrastructure.Persistence
         public virtual DbSet<ComunaEntity> Comuna { get; set; }
         public virtual DbSet<VersionEntity> Version { get; set; }
         public virtual DbSet<RoleClaimsEntity> RoleClaims { get; set; }
+        public virtual DbSet<MenuEntity> Menu { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -84,6 +85,17 @@ namespace WebApiAuth.Infrastructure.Persistence
                     .WithMany()
                     .HasForeignKey(ur => ur.IdComuna)
                     .HasConstraintName("FK_Usuario_Comuna");
+            });
+
+            builder.Entity<MenuEntity>(entity =>
+            {
+                entity.HasKey(e => new { e.idMenu });
+
+                entity.HasOne(e => e.Sistema)
+                .WithMany(r => r.menu)
+                .HasForeignKey(e => e.idsistema)
+                .HasConstraintName("FK_Menu_Sistema")
+                .IsRequired();
             });
 
         }

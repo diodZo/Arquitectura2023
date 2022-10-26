@@ -7,6 +7,7 @@ using System.Text;
 using WebApiAuth.Core.Domain.Entities;
 using WebApiAuth.Infrastructure.Persistence;
 using WebApiAuth.Infrastructure.SeedData;
+using WebApiAuth.Infrastructure.UnitOfWork;
 
 var builder = WebApplication.CreateBuilder(args);
 ConfigurationManager configuration = builder.Configuration;
@@ -15,6 +16,7 @@ ConfigurationManager configuration = builder.Configuration;
 
 // For Entity Framework
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(configuration.GetConnectionString("ConnStr")), ServiceLifetime.Transient);
+builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 builder.Services.AddTransient<DbInitializer>();
 
 // For Identity
@@ -41,6 +43,7 @@ builder.Services.AddAuthentication(options =>
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
 })
+
 // Adding Jwt Bearer
 .AddJwtBearer(options =>
 {

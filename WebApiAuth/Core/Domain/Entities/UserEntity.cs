@@ -6,6 +6,9 @@ namespace WebApiAuth.Core.Domain.Entities
 {
     public class UserEntity : IdentityUser<int>
     {
+        [Required]
+        [StringLength(15)]
+        public string Rut { get; set; }
 
         [Required]
         [StringLength(250)]

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 
 namespace WebApiAuth.Infrastructure.Persistence.Repositories.generic
@@ -12,16 +13,6 @@ namespace WebApiAuth.Infrastructure.Persistence.Repositories.generic
             this._context = context;
         }
 
-        public IQueryable<T> GetAll()
-        {
-            return _context.Set<T>();
-        }
-
-        public virtual async Task<ICollection<T>> GetAllAsyn()
-        {
-
-            return await _context.Set<T>().ToListAsync();
-        }
 
         public virtual T Get(int id)
         {
@@ -41,7 +32,7 @@ namespace WebApiAuth.Infrastructure.Persistence.Repositories.generic
             return t;
         }
 
-        public virtual async Task<T> AddAsyn(T t)
+        public virtual async Task<T> AddAsync(T t)
         {
             _context.Set<T>().Add(t);
             await _context.SaveChangesAsync();
@@ -75,7 +66,7 @@ namespace WebApiAuth.Infrastructure.Persistence.Repositories.generic
             _context.SaveChanges();
         }
 
-        public virtual async Task<int> DeleteAsyn(T entity)
+        public virtual async Task<int> DeleteAsync(T entity)
         {
             _context.Set<T>().Remove(entity);
             return await _context.SaveChangesAsync();
@@ -94,7 +85,7 @@ namespace WebApiAuth.Infrastructure.Persistence.Repositories.generic
             return exist;
         }
 
-        public virtual async Task<T> UpdateAsyn(T t, object key)
+        public virtual async Task<T> UpdateAsync(T t, object key)
         {
             if (t == null)
                 return null;
@@ -150,6 +141,41 @@ namespace WebApiAuth.Infrastructure.Persistence.Repositories.generic
             }
 
             return queryable;
+        }
+
+        public IQueryable<T> GetAll()
+        {
+            return _context.Set<T>();
+        }
+
+        public virtual async Task<ICollection<T>> GetAllAsync()
+        {
+
+            return await _context.Set<T>().ToListAsync();
+        }
+
+        public IQueryable<T> GetAll(params string[] including)
+        {
+            var query = _context.Set<T>().AsQueryable();
+            if (including != null)
+                including.ToList().ForEach(include =>
+                {
+                    if (!string.IsNullOrEmpty(include))
+                        query = query.Include(include);
+                });
+            return query;
+        }
+
+        public IQueryable<T> GetAll(params Expression<Func<T, object>>[] including)
+        {
+            var query = _context.Set<T>().AsQueryable();
+            if (including != null)
+                including.ToList().ForEach(include =>
+                {
+                    if (include != null)
+                        query = query.Include(include);
+                });
+            return query;
         }
 
         private bool disposed = false;

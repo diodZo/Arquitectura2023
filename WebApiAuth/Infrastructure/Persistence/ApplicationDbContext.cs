@@ -29,6 +29,7 @@ namespace WebApiAuth.Infrastructure.Persistence
         public virtual DbSet<VersionEntity> Version { get; set; }
         public virtual DbSet<RoleClaimsEntity> RoleClaims { get; set; }
         public virtual DbSet<MenuEntity> Menu { get; set; }
+        public virtual DbSet<EmpresaEntity> Empresa { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -81,10 +82,17 @@ namespace WebApiAuth.Infrastructure.Persistence
             {
                 entity.HasKey(e => new { e.Id });
 
+                entity.Ignore(c => c.EmpresaModel);
+
                 entity.HasOne(ur => ur.Comuna)
                     .WithMany()
                     .HasForeignKey(ur => ur.IdComuna)
                     .HasConstraintName("FK_Usuario_Comuna");
+
+                entity.HasOne(ur => ur.EmpresaModel)
+                    .WithMany()
+                    .HasForeignKey(ur => ur.IdEmpresa)
+                    .HasConstraintName("FK_Usuario_Empresa");
             });
 
             builder.Entity<MenuEntity>(entity =>
@@ -96,6 +104,22 @@ namespace WebApiAuth.Infrastructure.Persistence
                 .HasForeignKey(e => e.idsistema)
                 .HasConstraintName("FK_Menu_Sistema")
                 .IsRequired();
+            });
+
+            builder.Entity<EmpresaEntity>(empresa =>
+            {
+                empresa.HasKey(ur => new { ur.Id });
+
+                empresa.HasOne(ur => ur.comuna)
+                .WithMany()
+                .HasForeignKey(ur => ur.fk_comuna)
+                .HasConstraintName("FK_Empresa_Comuna");
+
+            });
+
+            builder.Entity<VersionEntity>(Version =>
+            {
+                Version.HasKey(ur => new { ur.Id });
             });
 
         }

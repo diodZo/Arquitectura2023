@@ -5,7 +5,7 @@ using WebApiAuth.Infrastructure.SeedData;
 
 internal static class DbInitializerExtension
 {
-    public static IApplicationBuilder UseItToSeedSqlServer(this IApplicationBuilder app)
+    public async static Task<IApplicationBuilder> UseItToSeedSqlServer(this IApplicationBuilder app)
     {
         ArgumentNullException.ThrowIfNull(app, nameof(app));
 
@@ -17,8 +17,8 @@ internal static class DbInitializerExtension
 
             var userManager = services.GetRequiredService<UserManager<UserEntity>>();
             var roleManager = services.GetRequiredService<RoleManager<RoleEntity>>();
-            DbInitializer.SeedTablasDiccionarios(context, roleManager);
-            DbInitializer.SeedUsers(context, userManager);
+            await DbInitializer.SeedTablasDiccionarios(context, roleManager);
+            await DbInitializer.SeedUsers(context, userManager);
         }
         catch (Exception ex)
         {

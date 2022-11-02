@@ -1,10 +1,11 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using WebApiAuth.Core.Domain.Entities;
+using WebApiAuth.Core.Services.impl;
+using WebApiAuth.Core.Services.inter;
 using WebApiAuth.Infrastructure.Persistence;
 using WebApiAuth.Infrastructure.SeedData;
 using WebApiAuth.Infrastructure.UnitOfWork;
@@ -16,8 +17,13 @@ ConfigurationManager configuration = builder.Configuration;
 
 // For Entity Framework
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(configuration.GetConnectionString("ConnStr")), ServiceLifetime.Transient);
-builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+//inicializador
 builder.Services.AddTransient<DbInitializer>();
+//UnitOfWork
+builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+//Services
+builder.Services.AddTransient<IMenuServices, MenuServices>();
+
 
 // For Identity
 builder.Services.AddIdentity<UserEntity, RoleEntity>()

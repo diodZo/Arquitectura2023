@@ -35,9 +35,14 @@ namespace WebApiAuth.Core.Domain.Entities
         [StringLength(300)]
         public string Imagen { get; set; } = string.Empty;
 
+        public int IdEmpresa { get; set; }
+
         public bool userLogin { get; set; }
 
         public virtual ComunaEntity Comuna { get; set; }
+
+        public virtual EmpresaEntity EmpresaModel { get; set; }
+
         public virtual ICollection<UserRoleEntity> UserRoles { get; set; }
     }
 }

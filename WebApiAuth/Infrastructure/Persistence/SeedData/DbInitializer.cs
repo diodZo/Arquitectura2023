@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using System.Data;
 using WebApiAuth.Core.Domain.Entities;
 using WebApiAuth.Infrastructure.Permissions;
@@ -9,7 +10,7 @@ namespace WebApiAuth.Infrastructure.SeedData
 {
     internal class DbInitializer
     {
-        internal static void SeedUsers(ApplicationDbContext dbContext, UserManager<UserEntity> userManager)
+        internal async static Task SeedUsers(ApplicationDbContext dbContext, UserManager<UserEntity> userManager)
         {
             try
             {
@@ -31,7 +32,8 @@ namespace WebApiAuth.Infrastructure.SeedData
                         Direccion = "Deuz Central",
                         IdComuna = "06201",
                         Imagen = string.Empty,
-                        userLogin = false
+                        userLogin = false,
+                        IdEmpresa = 1
                     };
 
                     var Admin = new UserEntity
@@ -47,7 +49,8 @@ namespace WebApiAuth.Infrastructure.SeedData
                         Direccion = "Deuz Central",
                         IdComuna = "06201",
                         Imagen = string.Empty,
-                        userLogin = false
+                        userLogin = false,
+                        IdEmpresa = 1
                     };
 
                     var Vendedor = new UserEntity
@@ -63,7 +66,8 @@ namespace WebApiAuth.Infrastructure.SeedData
                         Direccion = "Deuz Central",
                         IdComuna = "06201",
                         Imagen = string.Empty,
-                        userLogin = false
+                        userLogin = false,
+                        IdEmpresa = 1
                     };
 
                     var Usuario = new UserEntity
@@ -79,35 +83,36 @@ namespace WebApiAuth.Infrastructure.SeedData
                         Direccion = "Deuz Central",
                         IdComuna = "06201",
                         Imagen = string.Empty,
-                        userLogin = false
+                        userLogin = false,
+                        IdEmpresa = 1
                     };
 
-                    var result = userManager.CreateAsync(SuperAdmin, "D3uzTI@2023").Result;
+                    var result = await userManager.CreateAsync(SuperAdmin, "D3uzTI@2023");
 
                     if (result.Succeeded)
                     {
-                        userManager.AddToRoleAsync(SuperAdmin, "SuperAdmin").Wait();
+                        await userManager.AddToRoleAsync(SuperAdmin, "SuperAdmin");
                     }
 
-                    var result1 = userManager.CreateAsync(Admin, "D3uzTI@2023").Result;
+                    var result1 = await userManager.CreateAsync(Admin, "D3uzTI@2023");
 
                     if (result1.Succeeded)
                     {
-                        userManager.AddToRoleAsync(Admin, "Admin").Wait();
+                        await userManager.AddToRoleAsync(Admin, "Admin");
                     }
 
-                    var result2 = userManager.CreateAsync(Vendedor, "D3uzTI@2023").Result;
+                    var result2 = await userManager.CreateAsync(Vendedor, "D3uzTI@2023");
 
                     if (result2.Succeeded)
                     {
-                        userManager.AddToRoleAsync(Vendedor, "Vendedor").Wait();
+                        await userManager.AddToRoleAsync(Vendedor, "Vendedor");
                     }
 
-                    var result3 = userManager.CreateAsync(Usuario, "D3uzTI@2023").Result;
+                    var result3 = await userManager.CreateAsync(Usuario, "D3uzTI@2023");
 
                     if (result3.Succeeded)
                     {
-                        userManager.AddToRoleAsync(Usuario, "Usuario").Wait();
+                        await userManager.AddToRoleAsync(Usuario, "Usuario");
                     }
                 }
             }
@@ -117,13 +122,13 @@ namespace WebApiAuth.Infrastructure.SeedData
             }
         }
 
-        internal async static void SeedTablasDiccionarios(ApplicationDbContext context, RoleManager<RoleEntity> roleManager)
+        internal async static Task SeedTablasDiccionarios(ApplicationDbContext context, RoleManager<RoleEntity> roleManager)
         {
-            DbInitializer page = new DbInitializer();            
-
-            using (var dbContextTransaction = context.Database.BeginTransaction())
+            DbInitializer page = new DbInitializer();  
+            
+            if (!roleManager.Roles.Any())
             {
-                if (!roleManager.Roles.Any())
+                using (var dbContextTransaction = context.Database.BeginTransaction())
                 {
                     var roles = new List<RoleEntity>
                     {
@@ -138,9 +143,14 @@ namespace WebApiAuth.Infrastructure.SeedData
                     {
                         roleManager.CreateAsync(roles[i]).Wait();
                     }
+                    await context.SaveChangesAsync();
+                    dbContextTransaction.Commit();
                 }
+            }
 
-                if (!await context.Region.AnyAsync())
+            if (!context.Region.Any())
+            {
+                using (var dbContextTransaction = context.Database.BeginTransaction())
                 {
                     var region = new List<RegionEntity>
                     {
@@ -162,9 +172,14 @@ namespace WebApiAuth.Infrastructure.SeedData
                     };
 
                     await context.AddRangeAsync(region);
+                    await context.SaveChangesAsync();
+                    dbContextTransaction.Commit();
                 }
+            }
 
-                if (!await context.Provincia.AnyAsync())
+            if (!context.Provincia.Any())
+            {
+                using (var dbContextTransaction = context.Database.BeginTransaction())
                 {
                     var provincias = new List<ProvinciaEntity>
                     {
@@ -226,9 +241,14 @@ namespace WebApiAuth.Infrastructure.SeedData
                     };
 
                     context.AddRange(provincias);
+                    await context.SaveChangesAsync();
+                    dbContextTransaction.Commit();
                 }
+            }
 
-                if (!await context.Comuna.AnyAsync())
+            if (!context.Comuna.Any())
+            {
+                using (var dbContextTransaction = context.Database.BeginTransaction())
                 {
                     var zonas = new List<ComunaEntity>
                     {
@@ -582,17 +602,26 @@ namespace WebApiAuth.Infrastructure.SeedData
                     };
 
                     context.AddRange(zonas);
+                    await context.SaveChangesAsync();
+                    dbContextTransaction.Commit();
                 }
+            }
 
-                if (!await context.Version.AnyAsync())
+            if (!context.Version.Any())
+            {
+                using (var dbContextTransaction = context.Database.BeginTransaction())
                 {
                     VersionEntity version = new VersionEntity { version = "0.0.1", Descripcion = "prototipo inicial", FechaCreacion = DateTime.UtcNow, Estado = true };
 
-                    context.AddRange(version);
+                    context.Add(version);
+                    await context.SaveChangesAsync();
+                    dbContextTransaction.Commit();
                 }
+            }
 
-
-                if (!await context.RoleClaims.AnyAsync())
+            if (!context.RoleClaims.Any())
+            {
+                using (var dbContextTransaction = context.Database.BeginTransaction())
                 {
                     List<EnumModel> configuracion = ((permisos_configuracion[])Enum.GetValues(typeof(permisos_configuracion))).Select(c => new EnumModel() { Value = (int)c, Name = c.ToString() }).ToList();
 
@@ -624,11 +653,31 @@ namespace WebApiAuth.Infrastructure.SeedData
                     }
 
                     await context.AddRangeAsync(listaClaims);
+                    await context.SaveChangesAsync();
+                    dbContextTransaction.Commit();
                 }
+            }
 
-                await context.SaveChangesAsync();
-                dbContextTransaction.Commit();
-            }            
+            if (!context.Empresa.Any())
+            {
+                using (var dbContextTransaction = context.Database.BeginTransaction())
+                {
+                    EmpresaEntity empresa = new EmpresaEntity {
+                        rut ="1111111-1",
+                        razonSocial = "Deuz TI",
+                        direccion = "Avenida siempre viva 1234",
+                        telefono = "+569 1111111",
+                        email = "contacto@deuzti.cl",
+                        activo = true,
+                        fk_comuna = "06201",
+                        imagen = String.Empty
+                    };
+
+                    context.Add(empresa);
+                    await context.SaveChangesAsync();
+                    dbContextTransaction.Commit();
+                }
+            }
         }
     }
 }

@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.9">
       <PrivateAssets>all</PrivateAssets>
@@ -25,12 +26,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Core\Business\impl\" />
-    <Folder Include="Core\Business\inter\" />
+    <Folder Include="Core\Domain\Entities\" />
     <Folder Include="Core\Domain\ViewModels\" />
+    <Folder Include="Core\Services\impl\" />
+    <Folder Include="Core\Services\inter\" />
     <Folder Include="Infrastructure\Migrations\" />
-    <Folder Include="Infrastructure\Repositories\impl\" />
-    <Folder Include="Infrastructure\Repositories\inter\" />
+    <Folder Include="Infrastructure\Persistence\Repositories\impl\" />
+    <Folder Include="Infrastructure\Persistence\Repositories\inter\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SharedLibrary\SharedLibrary.csproj" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>

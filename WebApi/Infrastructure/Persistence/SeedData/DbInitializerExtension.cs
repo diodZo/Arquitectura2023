@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using WebApiAuth.Core.Domain.Entities;
-using WebApiAuth.Infrastructure.Persistence;
-using WebApiAuth.Infrastructure.Persistence.SeedData;
+﻿using WebApi.Infrastructure.Persistence;
 
 internal static class DbInitializerExtension
 {
@@ -14,11 +11,6 @@ internal static class DbInitializerExtension
         try
         {
             var context = services.GetRequiredService<ApplicationDbContext>();
-
-            var userManager = services.GetRequiredService<UserManager<UserEntity>>();
-            var roleManager = services.GetRequiredService<RoleManager<RoleEntity>>();
-            await DbInitializer.SeedTablasDiccionarios(context, roleManager);
-            await DbInitializer.SeedUsers(context, userManager);
         }
         catch (Exception ex)
         {

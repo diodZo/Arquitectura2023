@@ -1,7 +1,7 @@
 ﻿using System.Linq.Expressions;
 using WebApiAuth.Core.Domain.Entities;
 using WebApiAuth.Core.Services.inter;
-using WebApiAuth.Infrastructure.UnitOfWork;
+using WebApiAuth.Core.UnitOfWork;
 
 namespace WebApiAuth.Core.Services.impl
 {

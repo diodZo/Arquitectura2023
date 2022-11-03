@@ -1,8 +1,6 @@
-﻿using WebApiAuth.Infrastructure.Persistence;
-using WebApiAuth.Infrastructure.Persistence.Repositories.impl;
-using WebApiAuth.Infrastructure.Persistence.Repositories.inter;
+﻿using WebApi.Infrastructure.Persistence;
 
-namespace WebApiAuth.Core.UnitOfWork
+namespace WebApi.Core.UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {
@@ -11,10 +9,7 @@ namespace WebApiAuth.Core.UnitOfWork
         public UnitOfWork(ApplicationDbContext _context)
         {
             context = _context;
-            Menu = new MenuRepository(context);
         }
-
-        public IMenuRepository Menu { get; private set; }
 
         public void Dispose()
         {

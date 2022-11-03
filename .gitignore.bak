@@ -12,6 +12,7 @@
 data/pgadmin
 
 *WebApi/Infrastructure/Migrations
+*WebApiAuth/Infrastructure/Migrations
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs

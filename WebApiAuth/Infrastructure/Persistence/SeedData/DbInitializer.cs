@@ -1,12 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
+using SharedLibrary.Infrastructure.Helpers;
 using System.Data;
 using WebApiAuth.Core.Domain.Entities;
-using WebApiAuth.Infrastructure.Permissions;
-using WebApiAuth.Infrastructure.Persistence;
 
-namespace WebApiAuth.Infrastructure.SeedData
+namespace WebApiAuth.Infrastructure.Persistence.SeedData
 {
     internal class DbInitializer
     {
@@ -124,8 +122,8 @@ namespace WebApiAuth.Infrastructure.SeedData
 
         internal async static Task SeedTablasDiccionarios(ApplicationDbContext context, RoleManager<RoleEntity> roleManager)
         {
-            DbInitializer page = new DbInitializer();  
-            
+            DbInitializer page = new DbInitializer();
+
             if (!roleManager.Roles.Any())
             {
                 using (var dbContextTransaction = context.Database.BeginTransaction())
@@ -662,15 +660,16 @@ namespace WebApiAuth.Infrastructure.SeedData
             {
                 using (var dbContextTransaction = context.Database.BeginTransaction())
                 {
-                    EmpresaEntity empresa = new EmpresaEntity {
-                        rut ="1111111-1",
+                    EmpresaEntity empresa = new EmpresaEntity
+                    {
+                        rut = "1111111-1",
                         razonSocial = "Deuz TI",
                         direccion = "Avenida siempre viva 1234",
                         telefono = "+569 1111111",
                         email = "contacto@deuzti.cl",
                         activo = true,
                         fk_comuna = "06201",
-                        imagen = String.Empty
+                        imagen = string.Empty
                     };
 
                     context.Add(empresa);

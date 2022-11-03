@@ -1,5 +1,4 @@
 ﻿using WebApiAuth.Core.Domain.Entities;
-using WebApiAuth.Infrastructure.UnitOfWork;
 
 namespace WebApiAuth.Core.Services.inter
 {

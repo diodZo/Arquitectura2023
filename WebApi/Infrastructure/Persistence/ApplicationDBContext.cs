@@ -1,32 +1,19 @@
-﻿using Domain.Models;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WebApi.Infrastructure.Persistence;
 
-namespace Infrastructure.Persistence
+namespace WebApi.Infrastructure.Persistence
 {
-    public class ApplicationDBContext : DbContext, IApplicationDBContext
+    public class ApplicationDbContext : DbContext
     {
-        #region Ctor
-        public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options)
-         : base(options)
+        
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
-        #endregion
 
-        #region DbSet
-        public DbSet<AppSetting> AppSettings { get; set; }
-        #endregion
 
-        #region Methods
-        public Task<int> SaveChangesAsync()
+        protected override void OnModelCreating(ModelBuilder builder)
         {
-            return base.SaveChangesAsync();
+            base.OnModelCreating(builder);
         }
-        #endregion
     }
 }

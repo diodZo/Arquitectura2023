@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01_Presentation", "01_Presentation", "{2B3D5970-EDED-491B-AD22-0018F5D64068}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01_Back-End", "01_Back-End", "{2B3D5970-EDED-491B-AD22-0018F5D64068}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "WebApi\WebApi.csproj", "{F393C1AA-D3A2-4868-8DEC-5A6D6CBF6074}"
 EndProject
@@ -20,6 +20,12 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiAuth", "WebApiAuth\WebApiAuth.csproj", "{562A3A7B-295A-4F0B-AE13-8FE91C4DA7F1}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{47371731-7F76-44FB-B122-AE7DE083A045}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02_Front-End", "02_Front-End", "{E4A85444-BBD8-4197-95ED-B0A2C100AB3E}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "InventarioWebApp", "InventarioWebApp\InventarioWebApp.esproj", "{FFCAE45B-A166-47D6-A6FF-4E4B52CF7F97}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedLibrary", "SharedLibrary\SharedLibrary.csproj", "{A7FE93B2-511B-4242-8E9F-C39DEA53B95B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +45,16 @@ Global
 		{47371731-7F76-44FB-B122-AE7DE083A045}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47371731-7F76-44FB-B122-AE7DE083A045}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47371731-7F76-44FB-B122-AE7DE083A045}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFCAE45B-A166-47D6-A6FF-4E4B52CF7F97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFCAE45B-A166-47D6-A6FF-4E4B52CF7F97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFCAE45B-A166-47D6-A6FF-4E4B52CF7F97}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{FFCAE45B-A166-47D6-A6FF-4E4B52CF7F97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFCAE45B-A166-47D6-A6FF-4E4B52CF7F97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFCAE45B-A166-47D6-A6FF-4E4B52CF7F97}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{A7FE93B2-511B-4242-8E9F-C39DEA53B95B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7FE93B2-511B-4242-8E9F-C39DEA53B95B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7FE93B2-511B-4242-8E9F-C39DEA53B95B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7FE93B2-511B-4242-8E9F-C39DEA53B95B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -47,6 +63,8 @@ Global
 		{F393C1AA-D3A2-4868-8DEC-5A6D6CBF6074} = {2B3D5970-EDED-491B-AD22-0018F5D64068}
 		{562A3A7B-295A-4F0B-AE13-8FE91C4DA7F1} = {2B3D5970-EDED-491B-AD22-0018F5D64068}
 		{47371731-7F76-44FB-B122-AE7DE083A045} = {20638253-6EA9-4A90-9BA1-B03A0B067FA2}
+		{FFCAE45B-A166-47D6-A6FF-4E4B52CF7F97} = {E4A85444-BBD8-4197-95ED-B0A2C100AB3E}
+		{A7FE93B2-511B-4242-8E9F-C39DEA53B95B} = {2B3D5970-EDED-491B-AD22-0018F5D64068}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C225D439-3BC3-4745-9F76-1E6E94B5EFB0}

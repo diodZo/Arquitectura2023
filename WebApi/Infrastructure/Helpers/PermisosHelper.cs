@@ -1,4 +1,4 @@
-﻿namespace WebApiAuth.Infrastructure.Helpers
+﻿namespace WebApi.Infrastructure.Helpers
 {
     public class EnumModel
     {

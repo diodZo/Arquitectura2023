@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Access" MembersFormat="NameAndType">
+  <Class Name="WebApiAuth.Core.Domain.Entities.ComunaEntity">
+    <Position X="10.25" Y="1" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAgAAACAAAAAAAAAAAAgAAAAA=</HashCode>
+      <FileName>Core\Domain\Entities\ComunaEntity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebApiAuth.Core.Domain.Entities.EmpresaEntity">
+    <Position X="4.75" Y="1.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AQACAgCAAAAAIAAggAAAAAAAEAAAAAAAAAAAIAAAAAI=</HashCode>
+      <FileName>Core\Domain\Entities\EmpresaEntity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebApiAuth.Core.Domain.Entities.MenuEntity">
+    <Position X="7.25" Y="1.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>ABAACAAAAAAAAAAAAAABAAAAEAAMAAAAAQAAEAAAEAg=</HashCode>
+      <FileName>Core\Domain\Entities\MenuEntity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebApiAuth.Core.Domain.Entities.ProvinciaEntity">
+    <Position X="12.75" Y="1" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgACIAAAIAAAAgAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Domain\Entities\ProvinciaEntity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebApiAuth.Core.Domain.Entities.RegionEntity">
+    <Position X="16.25" Y="1" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAAAAAAAgAAACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Domain\Entities\RegionEntity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebApiAuth.Core.Domain.Entities.RoleClaimsEntity">
+    <Position X="2" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Domain\Entities\RoleClaimsEntity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebApiAuth.Core.Domain.Entities.RoleEntity">
+    <Position X="5.5" Y="5.75" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Domain\Entities\RoleEntity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebApiAuth.Core.Domain.Entities.SistemaEntity">
+    <Position X="9.75" Y="3.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAACCAAAAAAAAACAAAEAAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Domain\Entities\SistemaEntity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebApiAuth.Core.Domain.Entities.UserEntity">
+    <Position X="1.25" Y="3.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAACAAAEAAGAQAAAAAAAAABgAAEAACBAAAAI=</HashCode>
+      <FileName>Core\Domain\Entities\UserEntity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebApiAuth.Core.Domain.Entities.UserRoleEntity">
+    <Position X="3.25" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Core\Domain\Entities\UserRoleEntity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebApiAuth.Core.Domain.Entities.VersionEntity">
+    <Position X="13.75" Y="5.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAACACAAIAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Core\Domain\Entities\VersionEntity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="System.Object" Collapsed="true">
+    <Position X="20" Y="0.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

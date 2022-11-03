@@ -1,6 +1,6 @@
 ﻿using WebApiAuth.Infrastructure.Persistence.Repositories.inter;
 
-namespace WebApiAuth.Infrastructure.UnitOfWork
+namespace WebApiAuth.Core.UnitOfWork
 {
     public interface IUnitOfWork
     {

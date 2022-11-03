@@ -6,9 +6,9 @@ using System.Text;
 using WebApiAuth.Core.Domain.Entities;
 using WebApiAuth.Core.Services.impl;
 using WebApiAuth.Core.Services.inter;
+using WebApiAuth.Core.UnitOfWork;
 using WebApiAuth.Infrastructure.Persistence;
-using WebApiAuth.Infrastructure.SeedData;
-using WebApiAuth.Infrastructure.UnitOfWork;
+using WebApiAuth.Infrastructure.Persistence.SeedData;
 
 var builder = WebApplication.CreateBuilder(args);
 ConfigurationManager configuration = builder.Configuration;

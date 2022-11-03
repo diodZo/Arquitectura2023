@@ -1,0 +1,261 @@
+<div class="card">
+  <div class="card-head">Solicitud Código Médico</div>
+  <div class="card-body">
+
+
+    <div class="alert alert-info alert-dismissible" role="alert">
+      <p class="alert-heading"><i class="fa fa-info-circle"></i><strong> Atención</strong> Todos los campos son
+        obligatorios</p>
+    </div> 
+
+    <div class="row">
+      <form [formGroup]='formSearch' autocomplete="off" (submit)="GetUsuario()">
+        <mat-form-field appearance="fill">
+          <mat-label>BUSCAR POR RUT:</mat-label>
+          <input matInput formControlName="rut" name="rut" type="text" class="form-control" placeholder=" ejemplo: 11111111" required>
+          <button type="submit"  mat-raised-button matSuffix mat-stroked-button aria-label="search" color="primary" title="Buscar">
+            <mat-icon>search</mat-icon>
+          </button>
+        </mat-form-field>
+        <div class="form-text text-danger">
+          <mat-error *ngIf="this.formSearch.controls['rut'].touched && this.formSearch.controls['rut'].hasError('required')  ">(*)El campo es requerido</mat-error>
+          <mat-error *ngIf="this.formSearch.controls['rut'].touched && this.formSearch.controls['rut'].errors?.minlength">(*)Formato invalido</mat-error>
+          <mat-error *ngIf="this.formSearch.controls['rut'].touched && this.formSearch.controls['rut'].errors?.maxLength">(*)Formato invalido</mat-error>
+          <mat-error *ngIf="this.formSearch.controls['rut'].touched && this.formSearch.controls['rut'].hasError('pattern')">(*)Solo Números</mat-error>
+        </div>
+      </form>
+    </div>
+
+    <div *ngIf="TipoUsuarioX != 0">
+      <h4 class="form-outline col-12 mt-4">
+        <strong>Datos</strong>
+      </h4>
+      <hr />
+
+      <div >
+        <form [formGroup]='formMedico' autocomplete="off" class="col-12" id="formMedico" (submit)="Enviar()">
+
+          <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxFlexFill>
+            
+            <mat-form-field [appearance]="this.formMedico.rutInput != '' ?  'fill'  : 'outline'" class="example-full-width">
+                <mat-label>Rut</mat-label>                
+                <input matInput type="text" formControlName="rutInput" placeholder="ingresar un nombre" required [readonly]="this.TipoUsuarioBlock">
+                <input formControlName="rutOculto"  name="rutOculto" type="hidden" placeholder="rutOcultoX"/> 
+                <input formControlName="dvOculto"  name="dvOculto" type="hidden" placeholder="dvOculto"/> 
+                <input formControlName="dv"  name="dv" type="hidden" placeholder="dv"/> 
+                <input formControlName="usring"  name="usring" type="hidden" placeholder="usring"/> 
+                <input formControlName="estado"  name="estado" type="hidden" placeholder="estado"/> 
+                <div class="form-text text-danger">
+                  <mat-error *ngIf="campoEsValidoMedico('rutInput')">(*)El campo es requerido</mat-error>
+                </div>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="example-full-width" *ngIf="tieneCodigo">
+                <mat-label>CODIGO FARMACIA</mat-label>
+                <input matInput type="text" formControlName="codusuario"  placeholder="ingresar un codigo farmacia" [readonly]="true"/>
+            </mat-form-field>
+          </div>
+
+          <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxFlexFill>
+
+            <mat-form-field [appearance]="this.formMedico.nombres != '' ?  'fill'  : 'outline'" class="example-full-width" >
+              <mat-label>Nombre</mat-label>
+              <input matInput type="text" formControlName="nombres"  placeholder="ingresar un nombre"  required [readonly]="this.TipoUsuarioBlock">
+              <div class="form-text text-danger">
+                <mat-error *ngIf="campoEsValidoMedico('nombres')">(*)El campo es requerido</mat-error>
+              </div>
+            </mat-form-field>
+
+            <mat-form-field [appearance]="this.formMedico.nombre2 != '' ?  'fill'  : 'outline'" class="example-full-width" >
+              <mat-label>Segundo Nombre</mat-label>
+              <input matInput type="text" formControlName="nombre2"  placeholder="ingresar un nombre"  required [readonly]="this.TipoUsuarioBlock">
+              <div class="form-text text-danger">
+                <mat-error *ngIf="campoEsValidoMedico('nombre2')">(*)El campo es requerido</mat-error>
+              </div>
+            </mat-form-field>
+
+            <mat-form-field [appearance]="this.formMedico.apellpat != '' ?  'fill'  : 'outline'" class="example-full-width" >
+              <mat-label>Apellido Paterno</mat-label>
+              <input matInput type="text" formControlName="apellpat"  placeholder="Apellido Paterno"  required  [readonly]="this.TipoUsuarioBlock">
+              <div class="form-text text-danger">
+                <mat-error *ngIf="campoEsValidoMedico('apellpat')">(*)El campo es requerido</mat-error>
+              </div>
+            </mat-form-field>
+
+            <mat-form-field [appearance]="this.formMedico.apellmat != '' ?  'fill'  : 'outline'"  class="example-full-width" >
+              <mat-label>Apellido Materno</mat-label>
+              <input matInput type="text" formControlName="apellmat"  placeholder="Apellido Paterno"  required [readonly]="this.TipoUsuarioBlock">
+              <div class="form-text text-danger">
+                <mat-error *ngIf="campoEsValidoMedico('apellmat')">(*)El campo es requerido</mat-error>
+              </div>
+            </mat-form-field>
+          </div>
+
+          <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxFlexFill>
+            <mat-form-field appearance="outline" class="example-full-width" >
+              <mat-label>(*) Categoria</mat-label>
+              <mat-select formControlName="categoriaId" (selectionChange)="validarSelect('categoriaId')">
+                <mat-option *ngFor="let pos of categoria" [value]="pos.id">
+                  {{pos.nombre}}
+                </mat-option>
+              </mat-select>
+              <div class="form-text text-danger">
+                <mat-error *ngIf="validarSelect('categoriaId')">(*)El campo es requerido</mat-error>
+              </div>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="example-full-width" >
+              <mat-label>(*) Servicio</mat-label>
+              <mat-select formControlName="servicioId" (selectionChange)="validarSelect('servicioId')">
+                <mat-option *ngFor="let pos of servicios" [value]="pos.codigo">
+                  {{pos.denominacion}}
+                </mat-option>
+              </mat-select>
+              <div class="form-text text-danger">
+                <mat-error *ngIf="validarSelect('servicioId')">(*)El campo es requerido</mat-error>
+              </div>
+            </mat-form-field>
+
+
+            <mat-form-field appearance="outline" class="example-full-width">
+              <mat-label>(*) Fecha Inicio</mat-label>
+              <input matInput [matDatepicker]="picker" formControlName="fechaincioTxt" title="fecha inicio">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+              <div class="form-text text-danger">
+                <mat-error *ngIf="this.formMedico.controls['fechaincioTxt'].touched && validateFechaInicio('fechaincioTxt', 'fechaterminoTxt')">(*)Fecha inicio no puede ser mayor a la fecha fin</mat-error>
+                <mat-error *ngIf="this.formMedico.controls['fechaincioTxt'].touched && this.formMedico.controls['fechaincioTxt'].hasError('required')">(*)El campo es requerido</mat-error>
+              </div>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="example-full-width">
+              <mat-label>(*) Fecha Fin</mat-label>
+              <input matInput [matDatepicker]="pickerTer" formControlName="fechaterminoTxt" title="fecha termino">
+              <mat-datepicker-toggle matSuffix [for]="pickerTer"></mat-datepicker-toggle>
+              <mat-datepicker #pickerTer></mat-datepicker>
+              <div class="form-text text-danger">
+                <mat-error *ngIf="this.formMedico.controls['fechaterminoTxt'].touched &&  validateFechaFin('fechaterminoTxt', 'fechaincioTxt')">(*)Fecha fin no puede ser menor a la fecha de inicio</mat-error>
+                <mat-error *ngIf="this.formMedico.controls['fechaterminoTxt'].touched && this.formMedico.controls['fechaterminoTxt'].hasError('required')">(*)El campo es requerido</mat-error>
+              </div>
+            </mat-form-field>
+          </div>
+
+          <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxFlexFill>
+            <mat-form-field appearance="outline" class="example-full-width" >
+              <mat-label>Correo</mat-label>
+              <input matInput id="correo"  type="email" formControlName="correo" title="correo" (change)="validarCampoCorreo('correo')"/>
+              <div class="form-text text-danger" *ngIf="formMedico.controls['correo'].touched && formMedico.controls['correo'].invalid">
+                <mat-error *ngIf="formMedico.controls['correo'].errors!['pattern']">(*)Formato de correo invalido</mat-error>
+              </div>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="example-full-width" >
+              <mat-label>(*) Sistema de Contratación</mat-label>
+              <mat-select formControlName="contratacionId" (selectionChange)="onChangeContratacion($event.value)">
+                <mat-option *ngFor="let pos of sisContratacion" [value]="pos.codigo">
+                  {{pos.denominacion}}
+                </mat-option>
+              </mat-select>
+              <div class="form-text text-danger">
+                <mat-error *ngIf="validarSelect('contratacionId')">(*)El campo es requerido</mat-error>
+              </div>
+            </mat-form-field>
+
+          </div>
+
+          <div *ngIf="selectSistema != -1 && selectSistema != 3 && selectSistema != 5">
+            <h4 class="form-outline col-12 mt-4">
+              <strong>Documentos Solicitados</strong>
+            </h4>
+
+            <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxFlexFill>
+
+              <div class="uploadContains">
+                <mat-label>(*) Certificado de Titulo</mat-label>
+                <button type="button" mat-raised-button (click)="fileInput.click()" class="button-submit" color="accent"><span class="textSubir">Seleccionar Certificado </span> <mat-icon>cloud_upload</mat-icon></button>
+                <input hidden formControlName="certificadoTitulo" (change)="onFileChangecertificadoTitulo($event)" #fileInput type="file" accept=".pdf, .PDF">
+
+                <span class="file-name">Archivo: {{fakecertificadoTituloFile}}</span>
+                <div class="form-text text-danger">
+                  <mat-error *ngIf="campoEsValidoMedico('certificadoTitulo')">(*)El campo es requerido</mat-error>
+                </div>
+              </div>
+
+              <div class="uploadContains">
+                <mat-label>(*)  Super Intendencia</mat-label>
+                <button type="button" mat-raised-button (click)="fileInputSuper.click()" class="button-submit" color="accent"><span class="textSubir">Seleccionar Certificado </span><mat-icon>cloud_upload</mat-icon></button>
+                <input hidden formControlName="superIntendencia" (change)="onFileChangeSuperIntendenciaFile($event)" #fileInputSuper type="file" accept=".pdf, .PDF">
+
+                <span class="file-name">Archivo: {{fakeSuperIntendenciaFile}}</span>
+                <div class="form-text text-danger">
+                  <mat-error *ngIf="campoEsValidoMedico('superIntendencia')">(*)El campo es requerido</mat-error>
+                </div>
+              </div>
+
+              <div class="uploadContains">
+                <mat-label>(*) Eunacom</mat-label>
+                <button type="button" mat-raised-button (click)="fileInputeunacom.click()" class="button-submit" color="accent"><span class="textSubir">Seleccionar Certificado </span><mat-icon>cloud_upload</mat-icon></button>
+                <input hidden formControlName="eunacom" (change)="onFileChangeEunacomFile($event)" #fileInputeunacom type="file"  accept=".pdf, .PDF">
+
+                <span class="file-name">Archivo: {{fakeEunacomFile}}</span>
+                <div class="form-text text-danger">
+                  <mat-error *ngIf="campoEsValidoMedico('eunacom')">(*)El campo es requerido</mat-error>
+                </div>
+              </div>
+
+              <div class="uploadContains">
+                <mat-label>Certificado de Reconocimiento (Extranjero)</mat-label>
+                <button type="button" mat-raised-button (click)="fileInputReconocimiento.click()" class="button-submit" color="accent"><span class="textSubir">Seleccionar Certificado </span> <mat-icon>cloud_upload</mat-icon></button>
+                <input hidden formControlName="certificadoReconocimiento" (change)="onFileChangeCertificadoReconocimientoFile($event)" #fileInputReconocimiento type="file" accept=".pdf, .PDF">
+
+                <span class="file-name">Archivo: {{fakeReconocimientoFile}}</span>
+                <div class="form-text text-danger">
+                  <mat-error *ngIf="campoEsValidoMedico('certificadoReconocimiento')">(*)El campo es requerido</mat-error>
+                </div>
+              </div>
+            </div>
+
+            <div layout="column"  *ngIf="this.authService.tienePermiso(796)" class="containerButton">
+              <button type="submit"  mat-raised-button matSuffix mat-stroked-button aria-label="buscar" color="primary" class="button-submit" title="buscar"  [disabled]="this.submitted">
+                <mat-icon>save</mat-icon>
+                Guardar Solicitud
+              </button> 
+            </div>
+
+          </div>
+        </form>
+      </div>
+    </div>
+   
+
+   
+
+
+    <!-- <div class="row">
+
+     
+
+      <form [formGroup]='formSearch' autocomplete="off" class="col-12" id="formSearch" (submit)="GetUsuario()">
+        <div class="input-group">
+          <div class="form-outline col-md-10">
+            <label class="form-label" for="rut">Buscar Rut</label> 
+            <input formControlName="rut" name="rut" type="text" class="form-control" placeholder="Ejemplo: 1111111" required>
+
+          
+
+            <span class="form-text text-danger" *ngIf="this.formSearch.controls['rut'].touched && this.formSearch.controls['rut'].hasError('required') ">*Campo obligatorio</span>
+            <span class="form-text text-danger" *ngIf="this.formSearch.controls['rut'].touched && this.formSearch.controls['rut'].errors?.minlength ">*Formato invalido</span>
+            <span class="form-text text-danger" *ngIf="this.formSearch.controls['rut'].touched && this.formSearch.controls['rut'].errors?.maxLength">*Formato invalido</span>
+            <span class="form-text text-danger" *ngIf="this.formSearch.controls['rut'].touched && this.formSearch.controls['rut'].hasError('pattern') ">*Solo Números</span>
+          </div>
+          <div class="form-outline col-md-2 mt-4">
+            <button type="submit" class="btn btn-md btn-primary btn-block" title="buscar" [disabled]="!formSearch.valid">
+              <i class="fa fa-search"></i> Buscar
+            </button>
+          </div>         
+        </div>
+      </form>
+
+    </div> -->
+
+  </div>
+</div>

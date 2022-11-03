@@ -1,0 +1,88 @@
+// if you want to change the color of the icon
+.material-icons.color_white {color: #ffffff;}
+.close-button{
+  float: right;
+  top:-24px;
+  right:-24px;
+}
+
+//if you want some css animation
+.close-icon {
+  transition: 1s ease-in-out;
+}
+
+.close-icon:hover {
+  transform: rotate(180deg);
+}
+
+//To place the x mark outside of the container
+::ng-deep .icon-outside .close-button{
+  float: right;
+  top:-52px;
+  right:-52px;
+}
+
+::ng-deep .icon-outside .mat-dialog-container {
+ overflow: unset
+}
+
+// FORMULARIO
+mat-form-field.mat-form-field {
+  font-size: 0.8rem;
+  width: 90%;
+  .mat-raised-button{
+      margin-bottom: 5px;
+  }
+}
+
+hr {
+  margin: 0 1% 2% 0;
+}
+
+.mat-form-field+.mat-form-field {
+  margin-left: 8px;
+}
+
+mat-error {
+  margin-top: 10px;
+  font-size: 0.65rem !important;
+}
+
+.button-submit{
+  margin-top: 1%;
+  margin-bottom: 1%;
+  width: 100%;
+}
+
+.uploadContains{
+  margin-right: 8px;
+
+
+  mat-label{
+      font-size: 0.8rem;
+  }
+
+  .file-name{
+      font-size: 0.65rem;
+  }
+
+}
+
+
+@media (max-width: 650px) {
+  .mat-form-field+.mat-form-field {
+      margin-left: 0px;
+  }
+
+  .uploadContains{
+      margin-top: 1%;
+      margin-bottom: auto;
+      .textSubir{
+          display: none;
+      } 
+  }
+
+  .containerButton{
+      margin-top: 3%;  
+  }
+}

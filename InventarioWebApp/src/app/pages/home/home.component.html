@@ -1,0 +1,109 @@
+<div class="support-grid"></div>
+
+<div class="band">
+  <div class="item-1">
+    <div class="card">
+      <div class="thumb"
+        style="background-image: url(https://www.monumentos.gob.cl/sites/default/files/styles/slide_monumentos/public/image-monumentos/mh_00391_2017_avt_0056.jpg?itok=gIQBoukZ);">
+      </div>
+      <article>
+        <h1>Bienvenido a <strong>GESDOC</strong></h1>
+        <span>Hospital del salvador</span>
+      </article>
+    </div>
+  </div>
+
+  <div class="item-2" *ngIf=" this.authService.tienePermiso(this.env_permisos.GESTORDOCUMENTAL_BANDEJA_ENTRADA)">
+    <div class="card">
+      <div class="thumb"
+        style="background-image: url(https://img.freepik.com/vector-premium/icono-documento-carpeta_149152-438.jpg?w=2000);">
+      </div>
+      <article>
+        <h1>Gestor Documental </h1>
+        <mat-selection-list #shoes [multiple]="false">
+          <mat-list-option *ngFor="let shoe of gestorDocumental" [value]="shoe">
+            <div class="iconText" *ngIf="this.authService.tienePermiso(shoe.permiso)">
+              <a  [routerLink]="[shoe.url]" class="iconText">
+                <i class="fa fa-share" aria-hidden="true"> </i>
+                <p class="listOpt">{{shoe.nombre}}</p>
+              </a>
+            </div>
+          </mat-list-option>
+        </mat-selection-list>
+        <span>Hospital del salvador</span>
+      </article>
+    </div>
+  </div>
+
+  <div class="item-3"  *ngIf=" this.authService.tienePermiso(this.env_permisos.OFICINAPARTES_BUSQUEDA)">
+    <div class="card">
+      <div class="thumb"
+        style="background-image: url(data:image/jpeg;base64,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);">
+      </div>
+      <article>
+        <h1>Oficina Partes</h1>
+        <mat-selection-list #shoes [multiple]="false">
+          <mat-list-option *ngFor="let shoe of oficinaPartes" [value]="shoe">
+            <div class="iconText" *ngIf="this.authService.tienePermiso(shoe.permiso)">
+              <a  [routerLink]="[shoe.url]" class="iconText">
+                <i class="fa fa-share" aria-hidden="true"> </i>
+                <p class="listOpt">{{shoe.nombre}}</p>
+              </a>
+            </div>
+
+          </mat-list-option>
+        </mat-selection-list>
+        <span>Hospital del salvador</span>
+      </article>
+    </div>
+  </div>
+
+  <div class="item-4" *ngIf=" this.authService.tienePermiso(this.env_permisos.RRHH_VALIDAR_DESEMPE)">
+    <div class="card">
+      <div class="thumb"
+        style="background-image: url(https://empresas.infoempleo.com/hrtrends/media/2018/12/HRTRENDS_como_gestional_recursos_humanos_L.jpg);">
+      </div>
+      <article>
+        <h1>Recursos Humanos</h1>
+        <mat-selection-list #shoes [multiple]="false" *ngFor="let shoe of rrhh" >
+          <mat-list-option [value]="shoe">        
+            <mat-list-item *ngIf="this.authService.tienePermiso(shoe.permiso)">
+              <div class="iconText">
+                <a [routerLink]="[shoe.url]" class="iconText">
+                  <i class="fa fa-share" aria-hidden="true"> </i>
+                  <p class="listOpt">{{shoe.nombre}}</p>
+                </a>
+              </div>
+            </mat-list-item>
+        
+          </mat-list-option>
+        </mat-selection-list>
+        <span>Hospital del salvador</span>
+      </article>
+    </div>
+  </div>
+
+  <div class="item-5"  *ngIf=" this.authService.tienePermiso(this.env_permisos.CODIGOMEDICO_INGRESARSOLICITUD_PAGE)">
+    <div class="card">
+      <div class="thumb"
+        style="background-image: url(https://img.freepik.com/free-vector/front-back-id-card-template-with-picture_52683-45521.jpg?w=2000);">
+      </div>
+      <article>
+        <h1>Código Médico</h1>
+        <mat-selection-list #shoes [multiple]="false">
+          <mat-list-option *ngFor="let shoe of codigoMedico" [value]="shoe">
+            <div class="iconText" *ngIf="this.authService.tienePermiso(shoe.permiso)">
+              <a  [routerLink]="[shoe.url]" class="iconText">
+                <i class="fa fa-share" aria-hidden="true"> </i>
+                <p class="listOpt">{{shoe.nombre}}</p>
+              </a>
+            </div>
+
+          </mat-list-option>
+        </mat-selection-list>
+        <span>Hospital del salvador</span>
+      </article>
+    </div>
+  </div>
+
+</div>

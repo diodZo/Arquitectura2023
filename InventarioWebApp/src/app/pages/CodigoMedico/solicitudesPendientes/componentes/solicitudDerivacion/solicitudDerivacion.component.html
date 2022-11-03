@@ -1,0 +1,289 @@
+<div>
+  <button mat-icon-button class="close-button" (click)="onNoClick()">
+    <mat-icon class="close-icon">close</mat-icon>
+  </button>
+  <h1 mat-dialog-title>Detalle solicitud de código médico</h1>
+  <div mat-dialog-content style="max-height: 90vh">
+    <form [formGroup]='formMedico' autocomplete="off" class="col-12" id="formMedico">
+
+      <h5 class="form-outline col-12 mt-4">Datos Personales</h5>
+      <hr />
+
+      <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxFlexFill>
+        <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Rut</mat-label>                
+            <input matInput type="text" formControlName="rutInput" placeholder="ingresar un nombre" required>
+            <div class="form-text text-danger">
+              <mat-error *ngIf="campoEsValidoMedico('rutInput')">(*)El campo es requerido</mat-error>
+            </div>
+
+            <input formControlName="rutOculto"  name="rutOculto" type="hidden" placeholder="rutOcultoX"/> 
+            <input formControlName="dvOculto"  name="dvOculto" type="hidden" placeholder="dvOculto"/> 
+            <input formControlName="dv"  name="dv" type="hidden" placeholder="dv"/> 
+            <input formControlName="codigo"  name="codigo" type="hidden" placeholder="codigo"/> 
+            <input formControlName="estado"  name="estado" type="hidden" placeholder="estado"/> 
+
+            <input formControlName="categoriaId"  name="categoriaId" type="hidden" placeholder="categoriaId"/> 
+            <input formControlName="servicioId"  name="servicioId" type="hidden" placeholder="servicioId"/> 
+            <input formControlName="contratacionId"  name="contratacionId" type="hidden" placeholder="contratacionId"/> 
+            <input formControlName="codregini"  name="codregini" type="hidden" placeholder="codregini"/> 
+            <input formControlName="usring"  name="usring" type="hidden" placeholder="usring"/> 
+            <input formControlName="usrmod"  name="usrmod" type="hidden" placeholder="usrmod"/> 
+            <input formControlName="fecing"  name="fecing" type="hidden" placeholder="fecing"/> 
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="example-full-width" *ngIf="tieneCodigo">
+            <mat-label>CODIGO FARMACIA</mat-label>
+            <input matInput type="text" formControlName="codusuario"  placeholder="ingresar un codigo farmacia" [readonly]="true"/>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxFlexFill>
+        <mat-form-field appearance="outline" class="example-full-width" >
+          <mat-label>Nombre</mat-label>
+          <input matInput type="text" formControlName="nombres"  placeholder="ingresar nombre" required />
+          <div class="form-text text-danger">
+            <mat-error *ngIf="campoEsValidoMedico('nombres')">(*)El campo es requerido</mat-error>
+          </div>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="example-full-width" >
+          <mat-label>Segundo Nombre</mat-label>
+          <input matInput type="text" formControlName="nombre2"  placeholder="ingresar segundo nombre" required />
+          <div class="form-text text-danger">
+            <mat-error *ngIf="campoEsValidoMedico('nombre2')">(*)El campo es requerido</mat-error>
+          </div>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="example-full-width" >
+          <mat-label>Apellido Paterno</mat-label>
+          <input matInput type="text" formControlName="apellpat"  placeholder="ingresar apellido paterno" required />
+          <div class="form-text text-danger">
+            <mat-error *ngIf="campoEsValidoMedico('apellpat')">(*)El campo es requerido</mat-error>
+          </div>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="example-full-width" >
+          <mat-label>Apellido Materno</mat-label>
+          <input matInput type="text" formControlName="apellmat"  placeholder="ingresar apellido materno" required />
+          <div class="form-text text-danger">
+            <mat-error *ngIf="campoEsValidoMedico('apellmat')">(*)El campo es requerido</mat-error>
+          </div>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxFlexFill>
+        <mat-form-field appearance="outline" class="example-full-width" >
+          <mat-label>Categoria</mat-label>
+          <input matInput type="text" formControlName="categoriaText"  placeholder="Categoria" required/>
+          <div class="form-text text-danger">
+            <mat-error *ngIf="campoEsValidoMedico('categoriaText')">(*)El campo es requerido</mat-error>
+          </div>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="example-full-width" >
+          <mat-label>Servicio</mat-label>
+          <input matInput type="text" formControlName="servicioText"  placeholder="Servicio" required/>
+          <div class="form-text text-danger">
+            <mat-error *ngIf="campoEsValidoMedico('servicioText')">(*)El campo es requerido</mat-error>
+          </div>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="example-full-width" >
+          <mat-label>Fecha Inicio</mat-label>
+          <input matInput type="text" id="Xfechaincio"  placeholder="fecha inicio" value="{{fechain  | date: 'dd/MM/yyyy'}}" [disabled]="true" />
+          <input formControlName="fechaincio"  name="fechaincio" type="hidden" placeholder="usring" /> 
+        </mat-form-field>
+
+       
+        <mat-form-field appearance="outline" class="example-full-width" >
+          <mat-label>Fecha Fin</mat-label>
+          <input matInput type="text" id="xfechaTermino"  placeholder="fecha termino" value="{{fechater  | date: 'dd/MM/yyyy'}}"  [disabled]="true" />
+          <input formControlName="fechatermino"  name="fechatermino" type="hidden" placeholder="usring" /> 
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxFlexFill>
+
+        <mat-form-field appearance="outline" class="example-full-width" >
+          <mat-label>Correo</mat-label>
+          <input matInput type="text" formControlName="correo"  placeholder="Correo"/>
+          <div class="form-text text-danger">
+            <mat-error *ngIf="campoEsValidoMedico('correo')">(*)El campo es requerido</mat-error>
+          </div>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="example-full-width" >
+          <mat-label>Sistema de Contratación</mat-label>
+          <input matInput type="text" formControlName="contratacionText"  placeholder="sistema contratacion"/>
+          <div class="form-text text-danger">
+            <mat-error *ngIf="campoEsValidoMedico('contratacionText')">(*)El campo es requerido</mat-error>
+          </div>
+        </mat-form-field>
+      </div>
+
+      <h5 class="form-outline col-12 mt-4">Documentos Solicitados</h5>
+      <hr />
+
+      <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="5px" class="col-12">
+
+        <div class="card example-full-width col-md-3">
+          <div class="card-header">
+            <div class="row">
+              <div class="col-8">
+                <h5 class="card-title">Cert. de titulo<br /><br /></h5>
+                <input formControlName="IdcertificadoTitulo"  name="IdcertificadoTitulo" type="hidden" placeholder="IdcertificadoTitulo"/>
+              </div>
+              <div class="col-4">
+                <a  class="btn btn-sm btn-primary text-white col-12" title="ver" (click)="VerDocumento(this.txtTitulo)">
+                  <i class="fa fa-eye" ></i> 
+                </a>
+              </div>
+            </div>               
+          </div>
+          <div class="card-body">
+            <div class="row">                 
+              <div class="col-12">
+
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" id="vbcertificadoTitulo" [checked]="this.validadoTitulo" (change)="onChangeTitulo(this.validadoTitulo)">
+                  <label class="form-check-label" for="vbcertificadoTitulo">Estado: <strong>{{this.validadoTitulo ? 'Validado' : 'No Validado'}}</strong></label>
+                </div>
+              </div>
+            </div>               
+          </div>
+          <div class="card-footer" *ngIf="!this.validadoTitulo">
+            <div class="row">                 
+              <label class="form-label" for="obsTitulo">Observación:</label>
+              <textarea class="form-control" id="obsTitulo" rows="5" formControlName="obsTitulo"></textarea>
+            </div>  
+          </div>
+        </div>
+
+        <div class="card  example-full-width col-md-3" >
+          <div class="card-header">
+            <div class="row">
+              <div class="col-8">
+                <h5 class="card-title">Super <br />Intendencia</h5>
+                <input formControlName="IdsuperIntendencia"  name="IdsuperIntendencia" type="hidden" placeholder="IdsuperIntendencia"/>
+              </div>
+              <div class="col-4">
+                <a  class="btn btn-sm btn-primary text-white col-12" title="ver"  (click)="VerDocumento(this.txtTitulo)">
+                  <i class="fa fa-eye" ></i> 
+                </a>
+              </div>
+            </div>
+           
+          </div>
+          <div class="card-body">
+            <div class="row">                 
+              <div class="col-12">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" id="vbsuperIntendencia" [checked]="this.validadoSuperIntendencia" (change)="onChangeSuper(this.validadoSuperIntendencia)">
+                  <label class="form-check-label" for="vbsuperIntendencia">Estado: <strong>{{this.validadoSuperIntendencia ? 'Validado' : 'No Validado'}}</strong></label>
+                </div>
+              </div>
+            </div>               
+          </div>
+          <div class="card-footer" *ngIf="!this.validadoSuperIntendencia">
+            <div class="row">                 
+              <label class="form-label" for="obsSuperIntendencia">Observación:</label>
+              <textarea class="form-control" id="obsSuperIntendencia" rows="5" formControlName="obsSuperIntendencia"></textarea>
+            </div>  
+          </div>
+        </div>
+
+        <div class="card  example-full-width col-md-3">
+          <div class="card-header">
+            <div class="row">
+              <div class="col-8">
+                <h5 class="card-title">Eunacom <br /><br /></h5>
+                <input formControlName="Ideunacom"  name="Ideunacom" type="hidden" placeholder="Ideunacom"/>
+              </div>
+              <div class="col-4">
+                <a  class="btn btn-sm btn-primary text-white col-12"   title="ver"  (click)="VerDocumento(this.txtTitulo)" >
+                  <i class="fa fa-eye" ></i> 
+                </a>
+              </div>
+            </div>
+           
+          </div>
+          <div class="card-body">
+            <div class="row">                 
+              <div class="col-12">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" id="vbeunacom" [checked]="this.validadoEunacom" (change)="onChangeEunacom(this.validadoEunacom)">
+                  <label class="form-check-label" for="vbeunacom">Estado: <strong>{{this.validadoEunacom ? 'Validado' : 'No Validado'}}</strong></label>
+                </div>
+              </div>
+            </div>               
+          </div>
+          <div class="card-footer" *ngIf="!this.validadoEunacom">
+            <div class="row">                 
+              <label class="form-label" for="obsEunacom">Observación:</label>
+              <textarea class="form-control" id="obsEunacom" rows="5" formControlName="obsEunacom"></textarea>
+            </div>  
+          </div>
+        </div>
+
+        <div class="card example-full-width col-md-3">
+          <div class="card-header">
+            <div class="row">
+              <div class="col-8">
+                <h5 class="card-title">Cert. Reconcimiento</h5>
+                <input formControlName="IdcertificadoReconocimiento"  name="IdcertificadoReconocimiento" type="hidden" placeholder="IdcertificadoReconocimiento"/>
+               
+              </div>
+              <div class="col-4">
+                <a  class="btn btn-sm btn-primary text-white col-12"  title="ver"  (click)="VerDocumento(this.txtTitulo)" *ngIf="this.tieneReconocimiento">
+                  <i class="fa fa-eye" ></i> 
+                </a>
+               
+              </div>
+              <span class="badge bg-secondary" *ngIf="!this.tieneReconocimiento">SIN ARCHIVO - Solo extranjeros</span>
+            </div>
+           
+          </div>
+          <div class="card-body">
+            <div class="row">  
+                           
+              <div class="col-12">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" id="vbcertificadoReconocimiento" [checked]="this.validadoReconocimiento" (change)="onChangeReconocimiento(this.validadoReconocimiento)">
+                  <label class="form-check-label" for="vbcertificadoReconocimiento">Estado: <strong>{{this.validadoReconocimiento ? 'Validado' : 'No Validado'}}</strong></label>
+                </div>
+              </div>
+            </div>               
+          </div>
+          <div class="card-footer" *ngIf="!this.validadoReconocimiento">
+            <div class="row">                 
+              <label class="form-label" for="obsReconocimiento">Observación:</label>
+              <textarea class="form-control" id="obsReconocimiento" rows="5" formControlName="obsReconocimiento"></textarea>
+            </div>  
+          </div>
+        </div> 
+      </div>
+
+      <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="5px">
+
+        <div class="form-outline col-12" *ngIf="!this.validadoEunacom || !this.validadoSuperIntendencia || !this.validadoTitulo || !this.validadoReconocimiento">
+          <button type="submit"  mat-raised-button matSuffix mat-stroked-button aria-label="buscar" color="warn" class="button-submit" title="deribar" 
+                   (click)="btnDerivar(this.formMedico)" *ngIf="this.authService.tienePermiso(800)">
+            <mat-icon>save</mat-icon>
+            Derivar Solicitud
+          </button> 
+        </div>
+
+        <div class="form-outline col-12" *ngIf="this.validadoEunacom && this.validadoSuperIntendencia && this.validadoTitulo && this.validadoReconocimiento">
+          <button type="submit"  mat-raised-button matSuffix mat-stroked-button aria-label="buscar" color="primary"
+           class="button-submit" title="button-submit"  
+                  (click)="btnAprobar(this.formMedico)" *ngIf="this.authService.tienePermiso(799)">
+            <mat-icon>save</mat-icon>
+            Aprobar Solicitud
+          </button> 
+        </div>
+      </div>
+
+    
+    </form>
+  </div>
+</div>

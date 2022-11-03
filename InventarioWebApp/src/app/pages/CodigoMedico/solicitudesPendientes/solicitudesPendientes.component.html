@@ -1,0 +1,88 @@
+<div class="card">
+  <div class="card-head">Solicitud Código Médico</div>
+  <div class="card-body">
+    
+    <div class="example-container">
+      <mat-form-field appearance="standard" class="buscador">
+        <mat-label>Buscar</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Buscadors" #input class="buscador">
+      </mat-form-field>
+
+      <table mat-table [dataSource]="dataSource" matSort fixedLayout="true" class="table">
+
+        <ng-container matColumnDef="rut">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> RUT </mat-header-cell>
+          <mat-cell *matCellDef="let row" data-label="RUT"> {{row.rut}}-{{row.dv}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="nombres">
+          <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="20"> NOMBRE </mat-header-cell>
+          <mat-cell *matCellDef="let row" data-label="NOMBRE" fxFlex="20" title="{{row.nombres + ' ' + row.nombre2 + ' ' + row.apellpat + ' ' + row.apellmat}}" > {{row.nombres + ' ' + row.nombre2 + ' ' + row.apellpat + ' ' + row.apellmat | uppercase}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="categoriaText">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> CATEGORIA </mat-header-cell>
+          <mat-cell *matCellDef="let row" data-label="CATEGORIA"> {{row.categoriaText}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="servicioText">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> SERVICIO </mat-header-cell>
+          <mat-cell *matCellDef="let row" data-label="SERVICIO"> {{row.servicioText}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="contratacionText">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> CONTRATACION </mat-header-cell>
+          <mat-cell *matCellDef="let row" data-label="CONTRATACION"> {{row.contratacionText}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="fechaincio">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> F. INCIO </mat-header-cell>
+          <mat-cell *matCellDef="let row" data-label="F. INCIO"> {{row.fechaincio  | date: 'dd/MM/yyyy'}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="fechatermino">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> F. TERMINO </mat-header-cell>
+          <mat-cell *matCellDef="let row" data-label=" F. TERMINO"> {{row.fechatermino  | date: 'dd/MM/yyyy'}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="usuarioIng">
+          <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="15"> REGISTRA </mat-header-cell>
+          <mat-cell *matCellDef="let row" data-label="REGISTRA" fxFlex="15" title="{{row.usuarioIng}}"> {{row.usuarioIng}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="estado">
+          <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="10"> ESTADO </mat-header-cell>
+          <mat-cell *matCellDef="let element" data-label="ESTADO" fxFlex="10"> 
+            <span class="badge {{element.colorEstado}} text-white rounded-pill font15">
+              {{element.tipoEstado}}
+            </span>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="acciones">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> ACCIONES </mat-header-cell>
+          <mat-cell *matCellDef="let element" data-label="acciones" fixedLayout="true">
+
+            <div class="btn-group" role="group" aria-label="btnGroupConObservaciones" *ngIf="element.estado == 1">
+              <button mat-icon-button dplacement="top" title="editar" ngbTooltip="editar" (click)="openDialog(element)" *ngIf="this.authService.tienePermiso(798)">
+                <mat-icon color="primary">edit</mat-icon>
+              </button>
+            
+              <button mat-icon-button dplacement="top" title="anular" ngbTooltip="anular" (click)="openDialogAnular(element)" *ngIf="this.authService.tienePermiso(801)">
+                <mat-icon color="warn">delete</mat-icon>
+              </button>
+            </div>           
+            
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxFlexFill fxLayoutAlign="space-around none"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxFlexFill fxLayoutAlign="space-around none"></mat-row>
+      </table>
+      <div class="container">
+        <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 15]"></mat-paginator>
+      </div>
+    </div>
+
+  </div>
+</div>

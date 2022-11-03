@@ -1,0 +1,86 @@
+<div class="card">
+  <div class="card-head">Cambiar Contraseña</div>
+  <div class="card-body">
+    <div class="mainContenedor">
+      <div class="contenedor">
+        <div class="divBorder">
+          <img src="assets/img/logo2021.png" alt="" width="45%" class="center">
+        </div>
+      </div>
+      <div class="contenedor">
+
+        <div class="alert alert-info alert-dismissible" role="alert">
+          <p class="alert-heading"><i class="fa fa-info-circle"></i><strong> Atención</strong> Todos los campos son
+            obligatorios</p>
+        </div>
+
+        <form autocomplete="off" autocomplete="off" [formGroup]="changepassForm" (submit)="changePass()">
+          <div class="row">
+            <mat-form-field appearance="fill">
+              <mat-label>Contraseña Actual</mat-label>
+              <input matInput placeholder="contraseña actual" formControlName="oldpassword"
+                [type]="oldpasswordhide ? 'password' : 'text'" required>
+              <mat-icon matSuffix (click)="oldpasswordhide = !oldpasswordhide">{{oldpasswordhide ? 'visibility_off' :
+                'visibility'}}</mat-icon>
+
+              <div *ngIf="submitted && f.oldpassword.errors" class="form-text">
+                <mat-error *ngIf="f.oldpassword.errors?.required">(*)El campo es requerido</mat-error>
+                <mat-error *ngIf="f.oldpassword.errors?.minLength">(*)El campo debe tener un largo de 6 caracteres
+                  minimo</mat-error>
+              </div>
+            </mat-form-field>
+          </div>
+
+          <div class="row">
+            <mat-form-field appearance="fill">
+              <mat-label>Nueva Contraseña</mat-label>
+              <input matInput placeholder="Nueva Contraseña" formControlName="newpassword"
+                [type]="newpasswordhide ? 'password' : 'text'" required>
+              <mat-icon matSuffix (click)="newpasswordhide = !newpasswordhide">{{newpasswordhide ? 'visibility_off' :
+                'visibility'}}</mat-icon>
+
+              <div *ngIf="submitted && f.newpassword.errors" class="form-text text-danger">
+                <mat-error *ngIf="f.newpassword.errors?.required">(*)El campo es requerido</mat-error>
+                <mat-error *ngIf="f.newpassword.errors?.minLength">(*)El campo debe tener un largo de 6 caracteres
+                  minimo</mat-error>
+              </div>
+            </mat-form-field>
+          </div>
+
+          <div class="row">
+            <app-password [passwordCheck]="changepassForm.value.newpassword" (Strength)="passwordValid($event)">
+            </app-password>
+          </div>
+
+          <div class="row">
+            <mat-form-field appearance="fill">
+              <mat-label>Repetir Contraseña</mat-label>
+              <input matInput placeholder="Repetir Contraseña" formControlName="repitepassword"
+                [type]="repitepasswordhide ? 'password' : 'text'" required>
+              <mat-icon matSuffix (click)="repitepasswordhide = !repitepasswordhide">{{repitepasswordhide ?
+                'visibility_off' :
+                'visibility'}}</mat-icon>
+
+              <div *ngIf="submitted && f.repitepassword.errors" class="form-text text-danger">
+                <mat-error *ngIf="f.repitepassword.errors?.required  ">(*)El campo es requerido</mat-error>
+                <mat-error *ngIf="f.controls['repitepassword'].hasError('minlength')">(*)El campo debe tener un largo de
+                  6
+                  caracteres minimo </mat-error>
+                <mat-error *ngIf="f.repitepassword.errors?.mustMatch ">(*)Las contraseñas ingresadas no coinciden
+                </mat-error>
+              </div>
+            </mat-form-field>
+          </div>
+
+          <div class="row">
+            <button mat-raised-button type="submit" color="primary">
+              <i class="fa fa-save"></i> Guardar
+            </button>
+          </div>
+
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

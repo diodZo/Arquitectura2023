@@ -1,0 +1,9 @@
+ <app-sidenav (onToggleSideNav)="onToggleSideNav($event)" [navData]="navData"></app-sidenav>
+<app-header 
+    [collapsed]="isSideNavCollapsed" 
+    [nombreUsuario]="nombreCompleto" 
+    [screenWidth]="screenWidth"
+    (getlogout)="logout($event)">
+</app-header>
+
+<app-body [collapsed]="isSideNavCollapsed" [screenWidth]="screenWidth"></app-body>

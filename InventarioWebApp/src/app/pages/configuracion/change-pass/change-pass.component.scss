@@ -1,0 +1,49 @@
+.mainContenedor {
+    display: flex;
+  }
+  
+  .contenedor {
+    flex: 50%;
+  
+    .mat-form-field {
+      width: 100%;
+    }
+
+    .mat-raised-button{
+      margin-top: 20px;
+      width: 100%;
+    }
+  }
+
+  .divBorder{
+    border: thin solid black; margin: 10px;
+  }
+
+  .center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @media (max-width: 600px) {
+
+    .mainContenedor {
+      display: block;
+    }
+  
+    .contenedor {
+      flex: 100%;
+  
+      .mat-form-field {
+        width: 100%;
+      }
+  
+      .row .mat-form-field+.mat-form-field {
+        margin-left: 0px;
+      }
+
+      .divBorder{
+        display: none;
+      }
+    }
+  }

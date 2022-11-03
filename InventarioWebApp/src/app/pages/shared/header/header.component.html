@@ -1,0 +1,53 @@
+<div class="head" >
+    <div [ngClass]="getHeadClass()">
+        <div class="head-content">
+            <div class="head-content-left">
+                  <img src="assets/deuzlogo.svg" width="240" title="Hospital del Salvador"/>
+            </div>
+            <div class="head-content-right">
+                <div class="head-menu">                                     
+                    <div class="head-menu-item nombreX">
+                        <strong>BIENVENIDO &nbsp;</strong> <p >@{{nombreUsuario}}</p>
+                    </div>
+                </div>
+                <div class="head-user-avatar-container">
+                    <div class="head-user-avatar" [cdkMenuTriggerFor]="userOverLay">
+                        <img src="../.././../../assets/user-regular.svg" alt="" class="user-avatar">
+                        <div class="circle-indicator pulse"></div>
+                    </div>
+                </div>
+            </div>  
+        </div>
+    </div>
+  
+</div>
+
+
+<ng-template #userOverLay>
+    <div class="overlay overlay-user overlay-fall" cdkMenu>
+    <ul class="overlay-user overlay-fall">
+        <li cdkMenuItem class="cdk-menu-item ng-star-inserted">
+            <a mat-button routerLink="/configuracion/perfil" routerLinkActive="active" class="buttonPowerOff">
+                <div class="textleft">
+                    <i class="icon fa fa-bell-o"> Perfil</i>
+                </div>
+            </a>
+        </li>
+        <li cdkMenuItem class="cdk-menu-item ng-star-inserted">
+            <a mat-button routerLink="/configuracion/change-pass" routerLinkActive="active" class="buttonPowerOff">
+                <div class="textleft">
+                    <i class="icon fa fa-lock"> Cambiar Contraseña</i>
+                </div>
+            </a>
+        </li>
+        <hr>
+        <li cdkMenuItem class="cdk-menu-item ng-star-inserted">
+            <button type="button" mat-button (click)="this.logout()" class="buttonPowerOff" color="warn">
+                <div class="textleft">
+                    <i class="icon fa fa-power-off"> Cerrar sesión</i>
+                </div>
+            </button>
+        </li>
+    </ul>
+    </div>
+</ng-template>

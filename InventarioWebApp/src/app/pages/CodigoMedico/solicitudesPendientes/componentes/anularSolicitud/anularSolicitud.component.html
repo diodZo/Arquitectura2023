@@ -1,0 +1,125 @@
+<div>
+  <button mat-icon-button class="close-button" (click)="onNoClick()">
+    <mat-icon class="close-icon">close</mat-icon>
+  </button>
+  <h1 mat-dialog-title>Anular solicitud de código médico</h1>
+  <div mat-dialog-content style="max-height: 90vh">
+    <form [formGroup]='formMedico' autocomplete="off" class="col-12" id="formMedico">
+
+      <h5 class="form-outline col-12 mt-4">Datos Personales</h5>
+      <hr />
+
+      <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxFlexFill>
+        <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Rut</mat-label>                
+            <input matInput type="text" formControlName="rutInput" placeholder="ingresar un nombre" required>
+
+            <input formControlName="rutOculto"  name="rutOculto" type="hidden" placeholder="rutOcultoX"/> 
+            <input formControlName="dvOculto"  name="dvOculto" type="hidden" placeholder="dvOculto"/> 
+            <input formControlName="dv"  name="dv" type="hidden" placeholder="dv"/> 
+            <input formControlName="codigo"  name="codigo" type="hidden" placeholder="codigo"/> 
+            <input formControlName="estado"  name="estado" type="hidden" placeholder="estado"/> 
+
+            <input formControlName="categoriaId"  name="categoriaId" type="hidden" placeholder="categoriaId"/> 
+            <input formControlName="servicioId"  name="servicioId" type="hidden" placeholder="servicioId"/> 
+            <input formControlName="contratacionId"  name="contratacionId" type="hidden" placeholder="contratacionId"/> 
+            <input formControlName="codregini"  name="codregini" type="hidden" placeholder="codregini"/> 
+            <input formControlName="usring"  name="usring" type="hidden" placeholder="usring"/> 
+            <input formControlName="usrmod"  name="usrmod" type="hidden" placeholder="usrmod"/> 
+            <input formControlName="fecing"  name="fecing" type="hidden" placeholder="fecing"/> 
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="example-full-width" *ngIf="tieneCodigo">
+            <mat-label>CODIGO FARMACIA</mat-label>
+            <input matInput type="text" formControlName="codusuario"  placeholder="ingresar un codigo farmacia" [readonly]="true"/>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxFlexFill>
+        <mat-form-field appearance="outline" class="example-full-width" >
+          <mat-label>Nombre</mat-label>
+          <input matInput type="text" formControlName="nombres"  placeholder="ingresar nombre" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="example-full-width" >
+          <mat-label>Segundo Nombre</mat-label>
+          <input matInput type="text" formControlName="nombre2"  placeholder="ingresar segundo nombre" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="example-full-width" >
+          <mat-label>Apellido Paterno</mat-label>
+          <input matInput type="text" formControlName="apellpat"  placeholder="ingresar apellido paterno" required />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="example-full-width" >
+          <mat-label>Apellido Materno</mat-label>
+          <input matInput type="text" formControlName="apellmat"  placeholder="ingresar apellido materno" required />
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxFlexFill>
+        <mat-form-field appearance="outline" class="example-full-width" >
+          <mat-label>Categoria</mat-label>
+          <input matInput type="text" formControlName="categoriaText"  placeholder="Categoria" required/>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="example-full-width" >
+          <mat-label>Servicio</mat-label>
+          <input matInput type="text" formControlName="servicioText"  placeholder="Servicio" required/>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="example-full-width" >
+          <mat-label>Fecha Inicio</mat-label>
+          <input matInput type="text" id="Xfechaincio"  placeholder="fecha inicio" value="{{fechain  | date: 'dd/MM/yyyy'}}" [disabled]="true" />
+          <input formControlName="fechaincio"  name="fechaincio" type="hidden" placeholder="usring" /> 
+        </mat-form-field>
+
+       
+        <mat-form-field appearance="outline" class="example-full-width" >
+          <mat-label>Fecha Fin</mat-label>
+          <input matInput type="text" id="XfechaTermino"  placeholder="fecha termino" value="{{fechater  | date: 'dd/MM/yyyy'}}"  [disabled]="true" />
+          <input formControlName="fechatermino"  name="fechatermino" type="hidden" placeholder="usring" /> 
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxFlexFill>
+        <mat-form-field appearance="outline" class="example-full-width" >
+          <mat-label>Correo</mat-label>
+          <input matInput type="text" formControlName="correo"  placeholder="Correo"/>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="example-full-width" >
+          <mat-label>Sistema de Contratación</mat-label>
+          <input matInput type="text" formControlName="contratacionText"  placeholder="sistema contratacion"/>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxFlexFill>
+        <mat-form-field appearance="outline" class="example-full-width" >
+          <mat-label>Motivo Anulación</mat-label>
+          <textarea matInput 
+            placeholder="Motivo nulacion" 
+            formControlName="motivo"
+            cdkTextareaAutosize
+            cdkAutosizeMinRows="3"
+            cdkAutosizeMaxRows="5">
+            </textarea>
+
+        </mat-form-field>
+      </div>
+      
+      <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="5px">
+
+        <div class="form-outline col-12">
+          <button type="submit"  mat-raised-button matSuffix mat-stroked-button aria-label="anular" color="warn" class="button-submit" title="Anular" 
+          (click)="btnAnular(this.formMedico)" *ngIf="this.authService.tienePermiso(801) || this.authService.tienePermiso(802)">
+            <mat-icon>delete</mat-icon>
+            Anular Solicitud
+          </button> 
+        </div>
+      </div>
+        
+
+    
+    </form>
+  </div>
+</div>

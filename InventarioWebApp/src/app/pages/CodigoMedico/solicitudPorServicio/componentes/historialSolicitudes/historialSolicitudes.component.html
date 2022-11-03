@@ -1,0 +1,61 @@
+<div>
+  <button mat-icon-button class="close-button" (click)="onNoClick()">
+    <mat-icon class="close-icon">close</mat-icon>
+  </button>
+  <h1 mat-dialog-title>Historial solicitud de código médico</h1>
+  <div mat-dialog-content style="max-height: 90vh">
+    <div class="example-container">
+      <mat-form-field appearance="standard" class="buscador">
+        <mat-label>Buscar</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Buscadors" #input class="buscador">
+      </mat-form-field>
+
+      <table mat-table [dataSource]="dataSource" matSort fixedLayout="true" class="table">
+
+        <ng-container matColumnDef="rut">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> RUT </mat-header-cell>
+          <mat-cell *matCellDef="let row" data-label="RUT"> {{row.rut}}-{{row.dv}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="nombres">
+          <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="20"> NOMBRE </mat-header-cell>
+          <mat-cell *matCellDef="let row" data-label="NOMBRE" fxFlex="20" title="{{row.nombres + ' ' + row.nombre2 + ' ' + row.apellpat + ' ' + row.apellmat}}" > {{row.nombres + ' ' + row.nombre2 + ' ' + row.apellpat + ' ' + row.apellmat | uppercase}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="solicitante">
+          <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="20"> SOLICITANTE </mat-header-cell>
+          <mat-cell *matCellDef="let row" data-label="solicitante" fxFlex="20" title="{{row.usuarioIng}}" > {{row.usuarioIng | uppercase}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="fecing">
+          <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="20"> F. SOLICITUD </mat-header-cell>
+          <mat-cell *matCellDef="let row" data-label="fecing" fxFlex="20" title="{{row.fecing}}" > {{row.fecing |  date: 'dd/MM/yyyy HH:mm:ss'}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="motivo">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> MOTIVO </mat-header-cell>
+          <mat-cell *matCellDef="let row" data-label="motivo"> 
+            <p *ngFor="let myContent of row.motivo.split('\n')">
+              {{myContent}} 
+            </p>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="estado">
+          <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="10"> ESTADO </mat-header-cell>
+          <mat-cell *matCellDef="let element" data-label="ESTADO" fxFlex="10"> 
+            <span class="badge {{element.colorEstado}} text-white rounded-pill font15">
+              {{element.tipoEstado}}
+            </span>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxFlexFill fxLayoutAlign="space-around none"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxFlexFill fxLayoutAlign="space-around none"></mat-row>
+      </table>
+      <div class="container">
+        <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 15]"></mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>

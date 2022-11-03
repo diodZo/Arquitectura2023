@@ -21,7 +21,24 @@
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4",
-    "jest-editor-support": "*"
+    "jest-editor-support": "*",
+
+    "@angular-material-components/file-input": "^8.0.0",
+    "@angular/cdk": "^14.2.0",
+    "@angular/flex-layout": "^14.0.0-beta.40",
+    "@angular/material": "^14.2.0",
+    "@auth0/angular-jwt": "^5.0.2",
+    "@coreui/icons": "^2.1.0",
+    "alertifyjs": "^1.13.1",
+    "angular-sweetalert-2": "^1.0.1",
+    "bn-ng-idle": "^2.0.4",
+    "bootstrap": "^5.2.2",
+    "font-awesome": "^4.7.0",
+    "material-icons": "^1.11.11",
+    "ngx-spinner": "^14.0.0",
+    "simple-line-icons": "^2.5.5",
+    "sweetalert2": "^11.4.32",
+    "xng-breadcrumb": "^8.0.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^14.1.1",

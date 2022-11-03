@@ -1,0 +1,77 @@
+<div>
+    <!-- <h1>PERFIL</h1> -->
+    <div class="card">
+        <div class="card-head">Perfil de usuario</div>
+        <div class="card-body">  
+            
+            <div class="mainContenedor">            
+                <div class="contenedor">
+                    <form autocomplete="off" [formGroup]='form'>
+                        <div class="row">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Rut</mat-label>
+                                <input matInput placeholder="ingresar un rut" formControlName="rut" required>
+                            </mat-form-field>
+                        </div>
+            
+                        <div class="row">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Nombre</mat-label>
+                                <input matInput placeholder="ingresar un nombre" formControlName="nombres" required>
+                            </mat-form-field>
+            
+                            <mat-form-field appearance="fill">
+                                <mat-label>Segundo Nombre</mat-label>
+                                <input matInput placeholder="ingresar un nombre" formControlName="nombre2" required>
+                            </mat-form-field>
+                        </div>
+            
+                        <div class="row">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Apellido Paterno</mat-label>
+                                <input matInput placeholder="ingresar un Apellido" formControlName="apellpat" required>
+                            </mat-form-field>
+            
+                            <mat-form-field appearance="fill">
+                                <mat-label>Apellido Materno</mat-label>
+                                <input matInput placeholder="ingresar un Apellido" formControlName="apellmat" required>
+                            </mat-form-field>
+                        </div>
+            
+                        <div class="row">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Perfil En Sistema</mat-label>
+                                <input matInput placeholder="ingresar un Perfil" formControlName="rolEnSistema" required>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="fill">
+                                <mat-label>Email</mat-label>
+                                <input matInput placeholder="ingresar un Correo" formControlName="correo" required>
+                                <button  type="button" mat-mini-fab matSuffix aria-label="editar" color="primary" (click)="EditarEmail()">
+                                    <mat-icon>{{icono}}</mat-icon>
+                                </button>
+                            </mat-form-field>
+                        </div>
+                    </form>
+                </div>
+            
+                <div class="contenedor">
+                    <div class="example-container">
+                        <table mat-table [dataSource]="dataSource" matSort>
+                            <ng-container matColumnDef="denominacion">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header> SERVICIOS. </th>
+                                <td mat-cell *matCellDef="let element"> {{element.denominacion}} </td>
+                              </ng-container>
+    
+                              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>                     
+                        </table> 
+                        <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons ></mat-paginator>
+                    </div>
+                </div>
+            </div>
+          
+    
+        </div>
+    </div>
+</div>

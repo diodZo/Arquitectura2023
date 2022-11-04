@@ -2,12 +2,14 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using SharedLibrary.Infrastructure.Helpers;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using WebApiAuth.Core.Domain.Entities;
 using WebApiAuth.Core.Domain.ViewModels;
 using WebApiAuth.Core.Services.impl;
 using WebApiAuth.Core.Services.inter;
+using static SharedLibrary.Infrastructure.Helpers.RolesHelper;
 
 namespace WebApiAuth.Controllers
 {
@@ -24,6 +26,7 @@ namespace WebApiAuth.Controllers
 
         [HttpGet]
         [Route("GetAll")]
+        [AuthorizeRoles(roles.SuperAdmin, roles.Admin)]
         public async Task<IActionResult> GetAll()
         {
             try

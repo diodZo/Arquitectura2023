@@ -19,6 +19,7 @@ namespace WebApiAuth.Infrastructure.Persistence.SeedData
                 {
                     var SuperAdmin = new UserEntity
                     {
+                        Rut = "16.616.303-K",
                         UserName = "Deuzti.SuperAdmin",
                         NormalizedUserName = "Deuzti Super Administrador",
                         Email = "superadmin@deuz.cl",
@@ -36,6 +37,7 @@ namespace WebApiAuth.Infrastructure.Persistence.SeedData
 
                     var Admin = new UserEntity
                     {
+                        Rut = "14.224.633-3",
                         UserName = "Deuzti.Supervisor",
                         NormalizedUserName = "Deuzti Supervisor",
                         Email = "Supervisor@deuz.cl",
@@ -53,6 +55,7 @@ namespace WebApiAuth.Infrastructure.Persistence.SeedData
 
                     var Vendedor = new UserEntity
                     {
+                        Rut = "21.741.047-9",
                         UserName = "Deuzti.Vendedor",
                         NormalizedUserName = "Deuzti Vendedor",
                         Email = "Vendedor@deuz.cl",
@@ -70,6 +73,7 @@ namespace WebApiAuth.Infrastructure.Persistence.SeedData
 
                     var Usuario = new UserEntity
                     {
+                        Rut = "19.051.679-2",
                         UserName = "Deuzti.Usuario",
                         NormalizedUserName = "Deuzti Vendedor",
                         Email = "Usuario@deuz.cl",

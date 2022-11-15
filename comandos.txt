@@ -1,5 +1,9 @@
--- Migracion Auth 
+-- Migracion Auth codefirst
  Add-Migration "agregar parametros" -OutputDir Infrastructure/Migrations -project WebApiAuth
 
- --update base
+ --update base codefirst
  Update-Database -Context ApplicationDbContext -Connection "Host=localhost;port=5432;database=auth;username=bloguser;password=bloguser"
+
+
+ --migracion negocio dbFirts
+ Scaffold-DbContext "Host=localhost;port=5432;database=deusBD;username=bloguser;password=bloguser"  Npgsql.EntityFrameworkCore.PostgreSQL -OutputDir Models -Context "ApplicationDBContext" -DataAnnotations

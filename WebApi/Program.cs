@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using WebApi.Core.Services.impl;
+using WebApi.Core.Services.inter;
 using WebApi.Core.UnitOfWork;
 using WebApi.Infrastructure.Persistence;
 using WebApi.Infrastructure.Persistence.SeedData;
@@ -16,7 +18,7 @@ builder.Services.AddTransient<DbInitializer>();
 //UnitOfWork
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 //Services
-//builder.Services.AddTransient<IMenuServices, MenuServices>();
+builder.Services.AddTransient<ILugarService, LugarService>();
 
 
 // Adding Authentication

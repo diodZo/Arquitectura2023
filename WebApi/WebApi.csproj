@@ -26,13 +26,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Core\Domain\Entities\" />
-    <Folder Include="Core\Domain\ViewModels\" />
-    <Folder Include="Core\Services\impl\" />
-    <Folder Include="Core\Services\inter\" />
     <Folder Include="Infrastructure\Migrations\" />
-    <Folder Include="Infrastructure\Persistence\Repositories\impl\" />
-    <Folder Include="Infrastructure\Persistence\Repositories\inter\" />
+    <Folder Include="Models\" />
   </ItemGroup>
 
   <ItemGroup>

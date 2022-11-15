@@ -1,7 +1,9 @@
-﻿namespace WebApi.Core.UnitOfWork
+﻿using WebApi.Infrastructure.Persistence.Repositories.inter;
+
+namespace WebApi.Core.UnitOfWork
 {
     public interface IUnitOfWork
     {
-        int Save();
+        ILugarRepository lugar { get; }
     }
 }
